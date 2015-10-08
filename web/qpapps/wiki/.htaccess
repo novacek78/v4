@@ -1,0 +1,17 @@
+ErrorDocument 404 "http://www.quickpanel.sk/wiki/"
+
+RewriteEngine On
+
+RewriteRule ^faq-frequently-asked-questions/?$ ?p=faq [NC,L]
+RewriteRule ^read-before-buy-instructions/?$ ?p=faq [NC,L]
+RewriteRule ^discussion-groups-about-quickpanel/?$ ?p=discussion-forums [NC,L]
+
+RewriteRule ^tools-maximum-depths/?$ ?p=tools-maxdepths [NC,L]
+
+RewriteRule ^engraving-user-graphics-logo-hpgl-plt-file/?$ ?p=engraving-hpgl [NC,L]
+RewriteRule ^engraving-tips-and-tricks/?$ ?p=engraving-tips-tricks [NC,L]
+RewriteRule ^engraving-how-to-minimize-costs/?$ ?p=engraving-minimize-costs [NC,L]
+RewriteRule ^engraving-samples-examples/?$ ?p=engraving-examples [NC,L]
+RewriteRule ^engraving-how-to-choose-right-tool/?$ ?p=engraving-examples [NC,L]
+
+

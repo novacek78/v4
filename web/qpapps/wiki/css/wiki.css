@@ -1,0 +1,68 @@
+* {
+  font-family: Verdana, Tahoma, Arial;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+body {
+  background-color: #fff;
+  background-image: url(../img/logo_wiki.png);
+  background-position: left top;
+  background-repeat: no-repeat;
+  padding: 111px 0 10px 15px;
+  margin: 0 0 50px 0;
+}
+
+a {
+  color: black;
+  text-decoration: underline;
+  font-weight: bold;
+}
+a:hover {
+  color: #336699;
+  text-decoration: none;
+}
+
+ul {
+  margin-bottom: 15px;
+}
+
+td{
+  vertical-align: top;
+}
+
+h1 {
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 0;
+  margin-bottom: 33px;
+}
+
+li {
+  margin-bottom: 33px;
+}
+
+img {
+  margin: 3px;
+}
+
+td#menu{
+  width: 330px;
+  background-color: #eee;
+  padding: 10px;
+  border: 1px solid #888;
+  line-height: 1;
+  margin: 0;
+}
+td#menu li{
+  font-size: 12px;
+  line-height: 1;
+  margin: 0;
+}
+td#menu ul li a{
+  text-decoration: none;
+}
+td#menu ul li a:hover{
+  text-decoration: underline;
+}
+
