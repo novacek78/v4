@@ -4,8 +4,8 @@
 function LogAdmActivity($usrName, $activity, $oldVal = '', $newVal = '', $note = '') {
 
     $sqlStatement = "INSERT INTO adm_activity (user_login, aktivita, stara_hodnota, nova_hodnota, poznamka) VALUES ('$usrName', '$activity', '$oldVal', '$newVal', '$note')";
-    $v = sql($sqlStatement);
-    if ( ! $v) LogErr("Nepodarilo sa zapisat do admin-logu v DB. SQL:\n$sqlStatement");
+    if ( ! sql($sqlStatement))
+        Logger::error("Nepodarilo sa zapisat do admin-logu v DB. SQL:\n$sqlStatement");
 }
 
 
