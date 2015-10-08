@@ -1,0 +1,5 @@
+# PHPStorm files
+.idea/
+
+# Log Files
+logs-qp/
