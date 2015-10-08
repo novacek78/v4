@@ -42,28 +42,4 @@ class Logger
 
         self::_log($data, 'err', $withTimestamp);
     }
-
-    function LogErr($what, $timestamp = true) {
-
-        $f = FOpen(realpath($_SERVER["DOCUMENT_ROOT"]) . "/logs/" . date('Y-m-d') . "-error.txt", "a");
-        if ($timestamp)
-            FWrite($f, date('j.n.Y H:i') . " , IP:" . $_SERVER['REMOTE_ADDR'] . " , $what\r\n");
-        else
-            FWrite($f, "IP:" . $_SERVER['REMOTE_ADDR'] . " , $what\r\n");
-        FClose($f);
-        LogTxt(' [ERROR] ' . $what);
-    }
-
-    function LogTxt($what, $timestamp = true) {
-
-        if ($what == '') $timestamp = false; // ak sa loguje prazdny riadok, je to len na oddelenie, nedavat tam timestamp
-        if (1) {  // vyp/zap logovania
-            $f = FOpen(realpath($_SERVER["DOCUMENT_ROOT"]) . "/logs/" . date('Y-m-d') . "-log.txt", "a");
-            if ($timestamp)
-                FWrite($f, date('j.n.Y H:i') . " $what\r\n");
-            else
-                FWrite($f, "$what\r\n");
-            FClose($f);
-        }
-    }
 }
