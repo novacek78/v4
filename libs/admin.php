@@ -8,7 +8,6 @@ function LogAdmActivity($usrName, $activity, $oldVal = '', $newVal = '', $note =
         Logger::error("Nepodarilo sa zapisat do admin-logu v DB. SQL:\n$sqlStatement");
 }
 
-
 function UserHasAccess($user, $action, $what) {
 
     $v = sql("SELECT rights_$action AS rights FROM adm_users WHERE user_login='$user'");

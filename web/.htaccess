@@ -1,18 +1,32 @@
-ErrorDocument 404 "http://www.quickpanel.sk/"
-
 RewriteEngine on
 
-RewriteRule quickpanel-front-panels-home/?$ ?p=home [NC,L]
-RewriteRule download-quickpanel-program-software/?$ ?p=download [NC,L]
-RewriteRule download-quickpanel-program-software-newinst/?$ ?p=download-now&file=newinst [NC,L]
-RewriteRule download-quickpanel-program-software-update/?$ ?p=download-now&file=update [NC,L]
-RewriteRule gallery-sample-front-panels/?$ ?p=gallery [NC,L]
-RewriteRule changelog-changes-whats-new/?$ ?p=changelog [NC,L]
-RewriteRule how-to-wiki-faq/?$ /qpapps/wiki [NC,L]
-RewriteRule order-confirmation-ok/?$ ?p=orderconfirm&msg=ok [NC,L]
-RewriteRule order-confirmation-err_np/?$ ?p=orderconfirm&msg=err_np [NC,L]
-RewriteRule order-confirmation-err_ac/?$ ?p=orderconfirm&msg=err_ac [NC,L]
-RewriteRule order-confirmation-err_ns/?$ ?p=orderconfirm&msg=err_ns [NC,L]
-RewriteRule order-confirmation-err_ad/?$ ?p=orderconfirm&msg=err_ad [NC,L]
-RewriteRule order-confirmation-err_me/?$ ?p=orderconfirm&msg=err_me [NC,L]
-RewriteRule order-confirmation-err/?$ ?p=orderconfirm&msg=err [NC,L]
+# Presmerovanie domena.tld na http://www.domena.tld/
+RewriteCond %{HTTP_HOST} !^www\. [NC]
+RewriteRule ^(.*)$ http://www\.%{HTTP_HOST}/$1 [NC,L]
+
+# presmerovanie volani www.quickpanel.sk/adm --> www.quickpanel.sk/qpapps/admin
+# a pripadne dalsie slugy sa odovzdaju v GET parametri 'uri'
+RewriteCond %{REQUEST_URI} ^/adm [NC]
+RewriteRule ^adm(/*)(.*)$ http://%{HTTP_HOST}/qpapps/admin?uri=$2 [L]
+
+#RewriteCond %{REQUEST_URI} !^/?p=(.+) [NC]
+#RewriteCond %{REQUEST_URI} ^/(.+) [NC]
+#RewriteRule ^(.*)$ http://%{HTTP_HOST}/?p=$1 [L]
+
+
+#RewriteRule quickpanel-front-panels-home/?$ ?p=home [NC,L]
+#RewriteRule download-quickpanel-program-software/?$ ?p=download [NC,L]
+#RewriteRule download-quickpanel-program-software-newinst/?$ ?p=download-now&file=newinst [NC,L]
+#RewriteRule download-quickpanel-program-software-update/?$ ?p=download-now&file=update [NC,L]
+#RewriteRule gallery-sample-front-panels/?$ ?p=gallery [NC,L]
+#RewriteRule changelog-changes-whats-new/?$ ?p=changelog [NC,L]
+#RewriteRule how-to-wiki-faq/?$ /qpapps/wiki [NC,L]
+#RewriteRule order-confirmation-ok/?$ ?p=orderconfirm&msg=ok [NC,L]
+#RewriteRule order-confirmation-err_np/?$ ?p=orderconfirm&msg=err_np [NC,L]
+#RewriteRule order-confirmation-err_ac/?$ ?p=orderconfirm&msg=err_ac [NC,L]
+#RewriteRule order-confirmation-err_ns/?$ ?p=orderconfirm&msg=err_ns [NC,L]
+#RewriteRule order-confirmation-err_ad/?$ ?p=orderconfirm&msg=err_ad [NC,L]
+#RewriteRule order-confirmation-err_me/?$ ?p=orderconfirm&msg=err_me [NC,L]
+#RewriteRule order-confirmation-err/?$ ?p=orderconfirm&msg=err [NC,L]
+
+ErrorDocument 404 /index.php

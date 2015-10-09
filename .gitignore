@@ -3,3 +3,8 @@
 
 # Log Files
 logs-qp/
+
+# Bootstrap files
+bootstrap*
+glyphicons*
+
