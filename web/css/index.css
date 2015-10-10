@@ -1,199 +1,215 @@
 * {
-  margin: 0;
-  border: 0;
-  padding: 0;
-  font-family: Calibri, Tahoma, Verdana, Arial;
+    margin: 0;
+    border: 0;
+    padding: 0;
+    font-family: Calibri, Tahoma, Verdana, Arial;
 }
+
 body {
 }
-table,tr,td {
-  border-collapse: collapse;
-  vertical-align: top;
+
+table, tr, td {
+    border-collapse: collapse;
+    vertical-align: top;
 }
+
 h1 {
-  margin:0 8px; 
-  padding:0;
-  font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
-  font-size: 29px;
-  text-align: left;
+    margin: 0 8px;
+    padding: 0;
+    font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
+    font-size: 29px;
+    text-align: left;
 }
+
 h2 {
-  margin-bottom: 10px;
+    margin-bottom: 10px;
 }
+
 h4 {
-  margin:5px 0px 5px 20px; 
-  padding:0;
-  font-family: Cambria, Times New Roman;
-  font-size: 19px;
-  font-weight: bold;
-  text-align: left;
+    margin: 5px 0px 5px 20px;
+    padding: 0;
+    font-family: Cambria, Times New Roman;
+    font-size: 19px;
+    font-weight: bold;
+    text-align: left;
 }
 
 p {
-  font-size: 18px;
-  margin-bottom: 20px;
+    font-size: 18px;
+    margin-bottom: 20px;
 }
-
-
 
 #headerbar {
-  height: 240px;
-  background-image: url(../img/bgnd_v3_top.jpg);
-  background-repeat: repeat-x;
-  background-position: left top;
-  padding: 20px;
-  /*white-space: nowrap;*/
+    height: 240px;
+    background-image: url(../img/bgnd_v3_top.jpg);
+    background-repeat: repeat-x;
+    background-position: left top;
+    padding: 20px;
+    /*white-space: nowrap;*/
 }
+
 #headerbar-toplogo {
-  float: left;
+    float: left;
 }
+
 #headerbar-toptitle {
-  float: left;
-  /*white-space: nowrap;*/
+    float: left;
+    /*white-space: nowrap;*/
 }
+
 #headerbar-topmenu {
-  float: left;
-  padding-left: 30px;
+    float: left;
+    padding-left: 30px;
 }
+
 .toplink {
-  display: block;
-  height: 70px;
-  /*width: 250px;*/
-  padding-left: 5px;
-  padding-right: 20px;
-  float: left;
-  margin-top: 0px;
-  margin-right: 25px;
-  -moz-border-radius: 4px;
-  border-radius: 4px;
-  background-image: url(../img/semi-white-55.png);
-  color: black;
-  text-decoration: none;
-  font-size: 18px;
-  vertical-align: top;
+    display: block;
+    height: 70px;
+    /*width: 250px;*/
+    padding-left: 5px;
+    padding-right: 20px;
+    float: left;
+    margin-top: 0px;
+    margin-right: 25px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    background-image: url(../img/semi-white-55.png);
+    color: black;
+    text-decoration: none;
+    font-size: 18px;
+    vertical-align: top;
 }
+
 .toplink:hover {
-  background-image: url(../img/semi-white-33.png);
+    background-image: url(../img/semi-white-33.png);
 }
 
 .toplink img {
-  margin: 15px 10px 0 10px;
-  vertical-align: top;
-  float: left;
+    margin: 15px 10px 0 10px;
+    vertical-align: top;
+    float: left;
 }
+
 .toplink span {
-  display: block;
-  float: left;
-  margin-top: 10px;
+    display: block;
+    float: left;
+    margin-top: 10px;
 }
+
 .toplink span h3 {
-  font-size: 21px;
-  font-weight: bold;
-  display: inline;
+    font-size: 21px;
+    font-weight: bold;
+    display: inline;
 }
-
-
 
 #bodybar {
-  position:absolute;
-  top:    240px;
-  left:   0px;
-  right:  0px;
-  bottom: 0px;
-  overflow-y:scroll;        
-  background-image: url(../img/bgnd_v3_body.jpg);
-  background-attachment: fixed;
-  padding-top: 15px;
-  padding-left: 50px;
-  padding-right: 50px;
+    position: absolute;
+    top: 240px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    overflow-y: scroll;
+    background-image: url(../img/bgnd_v3_body.jpg);
+    background-attachment: fixed;
+    padding-top: 15px;
+    padding-left: 50px;
+    padding-right: 50px;
 }
+
 #bodybar h2.redcross {
-  background-image: url(../img/cross_red.png);
-  background-repeat: no-repeat;
-  background-position: left top;
-  height: 45px;
-  padding-left: 50px;
-  margin-bottom: 0px;
+    background-image: url(../img/cross_red.png);
+    background-repeat: no-repeat;
+    background-position: left top;
+    height: 45px;
+    padding-left: 50px;
+    margin-bottom: 0px;
 }
+
 #bodybar h2.checkmark {
-  background-image: url(../img/checkmark_green.png);
-  background-repeat: no-repeat;
-  background-position: left top;
-  height: 45px;
-  padding-left: 50px;
-  margin-bottom: 0px;
+    background-image: url(../img/checkmark_green.png);
+    background-repeat: no-repeat;
+    background-position: left top;
+    height: 45px;
+    padding-left: 50px;
+    margin-bottom: 0px;
 }
-#bodybar p.checkmark,p.redcross{
-  padding-left: 50px;
+
+#bodybar p.checkmark, p.redcross {
+    padding-left: 50px;
 }
 
 .bodylinkbutton {
-  display: block;
-  height: 70px;
-  width: 330px;
-  float: left;
-  margin-top: 0px;
-  margin-right: 33px;
-  border: 1px solid #bbb;
-  -moz-border-radius: 4px;
-  border-radius: 4px;
-  background-image: url(../img/semi-black-70.png);
-  color: black;
-  text-decoration: none;
-  font-size: 18px;
-  vertical-align: top;
+    display: block;
+    height: 70px;
+    width: 330px;
+    float: left;
+    margin-top: 0px;
+    margin-right: 33px;
+    border: 1px solid #bbb;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    background-image: url(../img/semi-black-70.png);
+    color: black;
+    text-decoration: none;
+    font-size: 18px;
+    vertical-align: top;
 }
+
 .bodylinkbutton:hover {
-  background-image: url(../img/semi-black-55.png);
+    background-image: url(../img/semi-black-55.png);
 }
+
 .bodylinkbutton img {
-  margin: 15px 10px 0 10px;
-  vertical-align: top;
-  float: left;
+    margin: 15px 10px 0 10px;
+    vertical-align: top;
+    float: left;
 }
+
 .bodylinkbutton span {
-  display: block;
-  float: left;
-  margin-top: 10px;
+    display: block;
+    float: left;
+    margin-top: 10px;
 }
+
 .bodylinkbutton span h3 {
-  font-size: 21px;
-  font-weight: bold;
-  display: inline;
+    font-size: 21px;
+    font-weight: bold;
+    display: inline;
 }
-#bodybar ul{
-  margin-bottom: 20px;
+
+#bodybar ul {
+    margin-bottom: 20px;
 }
 
 #contentbar {
-  padding: 0;
-  margin: 0;
-  width: 800px;
+    padding: 0;
+    margin: 0;
+    width: 800px;
 }
 
-.changeLogImg{
-  margin: 20px;
+.changeLogImg {
+    margin: 20px;
 }
-
 
 #footer {
-  border-top: 1px solid #ddd;
-  padding-top: 15px;
-  padding-left: 50px;
-  padding-right: 50px;
-  color: #bbb;
-  font-family: sans-serif;
-  font-size: 14px;
-}
-#footer img.flag {
-  margin-top: 10px;
-  margin-right: 15px;
-  margin-bottom: 25px;
-}
-#footer span.visibleText{
-  color: #888;
+    border-top: 1px solid #ddd;
+    padding-top: 15px;
+    padding-left: 50px;
+    padding-right: 50px;
+    color: #bbb;
+    font-family: sans-serif;
+    font-size: 14px;
 }
 
+#footer img.flag {
+    margin-top: 10px;
+    margin-right: 15px;
+    margin-bottom: 25px;
+}
+
+#footer span.visibleText {
+    color: #888;
+}
 
 /*
 td.content {

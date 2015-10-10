@@ -1,12 +1,13 @@
 RewriteEngine on
 
 # Presmerovanie domena.tld na http://www.domena.tld/
-RewriteCond %{HTTP_HOST} !^www\. [NC]
-RewriteRule ^(.*)$ http://www\.%{HTTP_HOST}/$1 [NC,L]
+#RewriteCond %{HTTP_HOST} !^www\. [NC]
+#RewriteRule ^(.*)$ http://www\.%{HTTP_HOST}/$1 [NC,L]
 
 # presmerovanie volani www.quickpanel.sk/adm --> www.quickpanel.sk/qpapps/admin
 # a pripadne dalsie slugy sa odovzdaju v GET parametri 'uri'
 RewriteCond %{REQUEST_URI} ^/adm [NC]
+#RewriteBase /qpapps/admin
 RewriteRule ^adm(/*)(.*)$ http://%{HTTP_HOST}/qpapps/admin?uri=$2 [L]
 
 #RewriteCond %{REQUEST_URI} !^/?p=(.+) [NC]

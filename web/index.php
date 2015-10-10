@@ -4,8 +4,8 @@ require '../init_frontend.php';
 
 session_start();
 
-Request::getParam('p', 'string', false, '/^[a-z,A-Z,-]{3,}$/', 'home');
-Request::getParam('lang', 'string', false, '/^[a-z,A-Z]{2}$/');
+Request::initParam('p', 'string', false, '/^[a-z,A-Z,-]{3,}$/', 'home');
+Request::initParam('lang', 'string', false, '/^[a-z,A-Z]{2}$/');
 
 
 if (isset($_PARAMS['lang']))
@@ -130,7 +130,7 @@ else
 
 <?php
 if ($_PARAMS['p'] == 'download-now') {
-?>
+    ?>
     <script type="text/javascript">
         document.location = '../files/download/<?php echo $filename?>';
     </script>

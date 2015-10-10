@@ -10,27 +10,39 @@ class Request
 {
 
     /**
-     * @param $name
-     * @return null|string
+     * @var string Hovori, ci je to 'get', 'post', 'ajax'
      */
-    private static function _getGet($name) {
+    private static $_requestType = '';
 
-        if (isset($_GET[$name]))
-            return $_GET[$name];
-        else
-            return null;
+    /**
+     * Povie, ci je aktualny request typu GET
+     *
+     * @return bool
+     */
+    public static function isGet() {
+
+        if (empty(self::$_requestType))
+            self::_initRequestType();
+
+        return (self::$_requestType == 'GET');
+    }
+
+    private static function _initRequestType() {
+
+        self::$_requestType = $_SERVER['REQUEST_METHOD'];
     }
 
     /**
-     * @param $name
-     * @return null|string
+     * Povie, ci je aktualny request typu POST
+     *
+     * @return bool
      */
-    private static function _getPost($name) {
+    public static function isPost() {
 
-        if (isset($_POST[$name]))
-            return $_POST[$name];
-        else
-            return null;
+        if (empty(self::$_requestType))
+            self::_initRequestType();
+
+        return (self::$_requestType == 'POST');
     }
 
     /**
@@ -43,9 +55,27 @@ class Request
      * @param mixed  $default
      * @param bool   $isPost Ci to je POST parameter
      */
-    public static function getParam($paramName, $type, $isRequired = false, $regexp = '', $default = null, $isPost = false) {  // ak je regexp posielany sem v dvojitych uvodzovkach, musia sa escape znaky este raz escapovat !
+    public static function initParam($paramName, $type, $isRequired = false, $regexp = '', $default = null, $isPost = false) {  // ak je regexp posielany sem v dvojitych uvodzovkach, musia sa escape znaky este raz escapovat !
 
         global $_PARAMS;
+
+        $tmp = self::getParam($paramName, $type, $isRequired, $regexp, $default, $isPost);
+
+        $_PARAMS[$paramName] = $tmp;
+    }
+
+    /**
+     * Vyhlada v parameter daneho mena a vrati ho
+     *
+     * @param string $paramName
+     * @param string $type   Datovy typ string|int|float
+     * @param bool   $isRequired
+     * @param string $regexp
+     * @param mixed  $default
+     * @param bool   $isPost Ci to je POST parameter
+     * @return mixed
+     */
+    public static function getParam($paramName, $type, $isRequired = false, $regexp = '', $default = null, $isPost = false) {  // ak je regexp posielany sem v dvojitych uvodzovkach, musia sa escape znaky este raz escapovat !
 
         $tmp = ($isPost) ? self::_getPost($paramName) : self::_getGet($paramName);
 
@@ -78,7 +108,7 @@ class Request
                     break;
                 default:
                     Logger::error('Parameter type"' . $type . '" unknown.');
-                    Logger::error("  URL requested: $_SERVER[SERVER_NAME] $_SERVER[REQUEST_URI]");
+                    Logger::error("    URL request: $_SERVER[SERVER_NAME]$_SERVER[REQUEST_URI]");
                     exit("PARAMETER TYPE UNKNOWN");
                     break;
             }
@@ -87,7 +117,43 @@ class Request
         if ( ! isset($tmp) && isset($default))
             $tmp = $default;
 
-        $_PARAMS[$paramName] = $tmp;
+        return $tmp;
+    }
+
+    /**
+     * @param $name
+     * @return null|string
+     */
+    private static function _getPost($name) {
+
+        if (isset($_POST[$name]))
+            return $_POST[$name];
+        else
+            return null;
+    }
+
+    /**
+     * @param $name
+     * @return null|string
+     */
+    private static function _getGet($name) {
+
+        if (isset($_GET[$name]))
+            return $_GET[$name];
+        else
+            return null;
+    }
+
+    public static function getUrlParam($paramNumber) {
+
+        global $_PARAMS;
+
+        if (count($_PARAMS) > $paramNumber) {
+            return $_PARAMS[$paramNumber];
+        } else {
+            Logger::error('Undefined param number: ' . $paramNumber . '. Request URI: ' . $_SERVER['REQUEST_URI']);
+            return 'undefined_param';
+        }
     }
 
     /**

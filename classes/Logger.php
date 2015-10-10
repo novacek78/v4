@@ -4,6 +4,11 @@ class Logger
 {
 
 
+    public static function info($data, $withTimestamp = true) {
+
+        self::_log($data, 'inf', $withTimestamp);
+    }
+
     private static function _log($data, $level, $withTimestamp) {
 
         $prependText = ($withTimestamp) ? date('j.n.Y H:i:s') . ' : ' : '';
@@ -31,11 +36,6 @@ class Logger
         } catch (Exception $e) {
         }
 //        LogTxt(' [ERROR] ' . $what);
-    }
-
-    public static function info($data, $withTimestamp = true) {
-
-        self::_log($data, 'inf', $withTimestamp);
     }
 
     public static function error($data, $withTimestamp = true) {

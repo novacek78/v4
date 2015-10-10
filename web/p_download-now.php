@@ -2,7 +2,7 @@
 // tento skript vlastne len pripravi nazov suboru, ktory sa bude stahovat a ulozi ho do premennej FILENAME
 // tato premenna je nasledne v hlavnom INDEX.PHP vyuzita na stiahnutie suboru
 
-Request::getParam('partnernick', 'string', false, '', 'quickpanel');
+Request::initParam('partnernick', 'string', false, '', 'quickpanel');
 
 
 if ( ! isset($_SESSION['partnernick']) || empty($_SESSION['partnernick'])) {
