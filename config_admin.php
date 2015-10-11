@@ -1,5 +1,6 @@
 <?php
 
+define('APP_DIR', 'Admin/');
 define('CLASSES_PREFIX', 'Admin_');
 define('BASE_HREF', '/adm');
 

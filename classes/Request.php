@@ -51,29 +51,14 @@ class Request
         return BASE_HREF . '/' . implode('/', $arrArgs);
     }
 
-    public static function redirect($url) {
+    public static function redirect($uri) {
 
-        header('Location: ' . $url);
-        exit;
-    }
+        $currentUri = BASE_HREF . '/' . self::getParam('uri', REQUEST_PARAM_STRING);
 
-    /**
-     * Vyhlada v GET/POST poli parameter daneho mena a nainicializuje ho do glob.pola $_PARAMS
-     *
-     * @param string $paramName
-     * @param int    $type Datovy typ string|int|float (podla konstant REQUEST_PARAM_XXX)
-     * @param bool   $isRequired
-     * @param string $regexp
-     * @param mixed  $default
-     * @param bool   $isPost Ci to je POST parameter
-     */
-    public static function initParam($paramName, $type, $isRequired = false, $regexp = '', $default = null, $isPost = false) {  // ak je regexp posielany sem v dvojitych uvodzovkach, musia sa escape znaky este raz escapovat !
-
-        global $_PARAMS;
-
-        $tmp = self::getParam($paramName, $type, $isRequired, $regexp, $default, $isPost);
-
-        $_PARAMS[$paramName] = $tmp;
+        if ($currentUri != $uri) { // aby nedoslo k zacyklenemu presmerovaniu napr. z 'login' na 'login'
+            header('Location: ' . $uri);
+            exit;
+        }
     }
 
     /**
@@ -154,6 +139,25 @@ class Request
             return $_GET[$name];
         else
             return null;
+    }
+
+    /**
+     * Vyhlada v GET/POST poli parameter daneho mena a nainicializuje ho do glob.pola $_PARAMS
+     *
+     * @param string $paramName
+     * @param int    $type   Datovy typ string|int|float (podla konstant REQUEST_PARAM_XXX)
+     * @param bool   $isRequired
+     * @param string $regexp
+     * @param mixed  $default
+     * @param bool   $isPost Ci to je POST parameter
+     */
+    public static function initParam($paramName, $type, $isRequired = false, $regexp = '', $default = null, $isPost = false) {  // ak je regexp posielany sem v dvojitych uvodzovkach, musia sa escape znaky este raz escapovat !
+
+        global $_PARAMS;
+
+        $tmp = self::getParam($paramName, $type, $isRequired, $regexp, $default, $isPost);
+
+        $_PARAMS[$paramName] = $tmp;
     }
 
     public static function getUrlParam($paramNumber) {

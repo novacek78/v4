@@ -8,6 +8,7 @@ abstract class Admin_ControllerAbstract extends Controller
      */
     public function __construct() {
 
+        parent::__construct();
 
         $this->_loggedUserOnly();
     }
@@ -20,10 +21,9 @@ abstract class Admin_ControllerAbstract extends Controller
         // kontrola, ci je user prihlaseny
         if ( ! isset($_SESSION['isLoggeedIn']) || ($_SESSION['isLoggeedIn'] !== true)) {
 
-            // redirect na login (ak uz nie sme na login page)
+            // redirect na login
             unset($_SESSION);
-            if (Request::getParam('uri', REQUEST_PARAM_STRING) != 'login')
-                Request::redirect(Request::makeUri('login'));
+            Request::redirect(Request::makeUri('login'));
         }
     }
 }

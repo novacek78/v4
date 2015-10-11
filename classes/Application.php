@@ -21,6 +21,7 @@ class Application
 
             $this->_Controller = new $controllerName();
             $this->_Controller->run();
+            $this->_Controller->render();
         } else {
             throw new Exception('Unknown controller: ' . $controllerName);
         }

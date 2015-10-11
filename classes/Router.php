@@ -20,7 +20,7 @@ class Router
 
                 // vyescapujeme lomitka
                 $pattern = "/^" . str_replace('/', '\/', $route) . "$/";
-                // nahradime * za regex tvar
+                // nahradime * za regex analogiu
                 $pattern = str_replace('*', '[a-z0-9]+', $pattern);
 
                 if (preg_match($pattern, $uri) === 1) {
