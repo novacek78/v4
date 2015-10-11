@@ -7,7 +7,7 @@ require 'config_common.php';
 // autoloader tried
 spl_autoload_register(function ($class) {
 
-    $classFileName = CLASS_DIR . $class . '.php';
+    $classFileName = CLASS_DIR . str_replace('_', DIRECTORY_SEPARATOR, $class) . '.php';
 
     if (file_exists($classFileName))
         include $classFileName;

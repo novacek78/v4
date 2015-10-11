@@ -13,15 +13,10 @@ class Application
 
         session_start();
 
-        // kontrola, ci je user prihlaseny
-        if (isset($_SESSION['isLoggeedIn']) && ($_SESSION['isLoggeedIn'] === true)) {
-            $controllerName = Router::run();
-        } else {
-            $controllerName = 'Login';
-        }
+        $controllerName = Router::getControllerName();
 
         // spustenie daneho kontrollera
-        $controllerName = "Controller$controllerName";
+        $controllerName = CLASSES_PREFIX . "Controller" . $controllerName;
         if (class_exists($controllerName)) {
 
             $this->_Controller = new $controllerName();

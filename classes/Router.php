@@ -8,12 +8,10 @@ class Router
      *
      * @return string
      */
-    public static function run() {
-
-        $controllerName = '';
+    public static function getControllerName() {
 
         // vytiahneme z URL parameter 'uri', kde su ulozene vsetky slug parametre requestu
-        $uri = strtolower(Request::getParam('uri', 'string'));
+        $uri = strtolower(Request::getParam('uri', REQUEST_PARAM_STRING));
 
         $routes = unserialize(ROUTES);
 
@@ -32,6 +30,10 @@ class Router
                 }
             }
         }
+
+        // default controller
+        if ( ! isset($controllerName))
+            $controllerName = 'Home';
 
         return $controllerName;
     }

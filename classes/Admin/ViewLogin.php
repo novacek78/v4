@@ -1,6 +1,6 @@
 <?php
 
-class ViewLogin extends View
+class Admin_ViewLogin extends Admin_ViewAbstract
 {
 
     public function render() {

@@ -45,11 +45,23 @@ class Request
         return (self::$_requestType == 'POST');
     }
 
+    public static function makeUri() {
+
+        $arrArgs = func_get_args();
+        return BASE_HREF . '/' . implode('/', $arrArgs);
+    }
+
+    public static function redirect($url) {
+
+        header('Location: ' . $url);
+        exit;
+    }
+
     /**
      * Vyhlada v GET/POST poli parameter daneho mena a nainicializuje ho do glob.pola $_PARAMS
      *
      * @param string $paramName
-     * @param string $type   Datovy typ string|int|float
+     * @param int    $type Datovy typ string|int|float (podla konstant REQUEST_PARAM_XXX)
      * @param bool   $isRequired
      * @param string $regexp
      * @param mixed  $default
@@ -65,10 +77,10 @@ class Request
     }
 
     /**
-     * Vyhlada v parameter daneho mena a vrati ho
+     * Vyhlada parameter daneho mena a vrati ho
      *
      * @param string $paramName
-     * @param string $type   Datovy typ string|int|float
+     * @param int    $type Datovy typ string|int|float (podla konstant REQUEST_PARAM_XXX)
      * @param bool   $isRequired
      * @param string $regexp
      * @param mixed  $default
@@ -97,17 +109,17 @@ class Request
 
         if (isset($tmp)) {
             switch ($type) {
-                case 'int':
+                case REQUEST_PARAM_INT:
                     $tmp = (int)$tmp;
                     break;
-                case 'float':
+                case REQUEST_PARAM_FLOAT:
                     $tmp = (float)$tmp;
                     break;
-                case 'string':
+                case REQUEST_PARAM_STRING:
                     $tmp = (string)$tmp;
                     break;
                 default:
-                    Logger::error('Parameter type"' . $type . '" unknown.');
+                    Logger::error('Parameter type "' . $type . '" unknown.');
                     Logger::error("    URL request: $_SERVER[SERVER_NAME]$_SERVER[REQUEST_URI]");
                     exit("PARAMETER TYPE UNKNOWN");
                     break;

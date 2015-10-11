@@ -1,6 +1,6 @@
 <?php
 
-class ControllerLogin extends Controller
+class Admin_ControllerLogin extends Admin_ControllerAbstract
 {
 
     public function run() {

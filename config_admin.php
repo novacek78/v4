@@ -1,5 +1,8 @@
 <?php
 
+define('CLASSES_PREFIX', 'Admin_');
+define('BASE_HREF', '/adm');
+
 $routes = array();
 
 $ctrl = 'Orders';
@@ -15,7 +18,8 @@ $routes[$ctrl][] = 'login';
 $ctrl = 'Utils';
 $routes[$ctrl][] = 'tmppanels';
 
-$ctrl = '';
+$ctrl = 'Home';
+$routes[$ctrl][] = '';
 $routes[$ctrl][] = '*';
 $routes[$ctrl][] = '*/*';
 $routes[$ctrl][] = '*/*/*';

@@ -20,7 +20,8 @@ class Controller
     protected function _render() {
 
         if ( ! isset($this->_View)) {
-            $viewName = 'View' . str_replace('Controller', '', get_class($this));
+            // potrebujeme z nazvu ako 'Admin_ControllerLogin'  vyrobit 'Admin_ViewLogin'
+            $viewName = str_replace('Controller', 'View', get_class($this));
             $this->_View = new $viewName();
         }
 
