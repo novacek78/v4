@@ -46,6 +46,26 @@ class Projecto_ControllerEmail extends Projecto_ControllerAbstract
         $this->_setViewData('title', 'Projecto');
         $this->_setViewData('mailboxes', $foldersHtml);
         $this->_setViewData('messages', $msgsHtml);
-        $this->_setViewData('message_body', 'Ahoj Janko....<br>Ahoj Janko....<br>Ahoj Janko....<br>Ahoj Janko....<br>Ahoj Janko....<br>Ahoj Janko....<br>Ahoj Janko....<br>Ahoj Janko....<br>Ahoj Janko....<br>Ahoj Janko....<br>Ahoj Janko....<br>Ahoj Janko....<br>Ahoj Janko....<br>Ahoj Janko....<br>Ahoj Janko....<br>Ahoj Janko....<br>Ahoj Janko....<br>Ahoj Janko....<br>Ahoj Janko....<br>Ahoj Janko....<br>Ahoj Janko....<br>');
+        $this->_setViewData('message_body', 'Ahoj Janko....<br>
+Ahoj Janko....<br>
+Ahoj Janko....<br>
+Ahoj Janko....<br>
+Ahoj Janko....<br>
+Ahoj Janko....<br>
+Ahoj Janko....<br>
+Ahoj Janko....<br>
+Ahoj Janko....<br>
+Ahoj Janko....<br>
+Ahoj Janko....<br>
+Ahoj Janko....<br>
+Ahoj Janko....<br>
+Ahoj Janko....<br>
+Ahoj Janko....<br>
+Ahoj Janko....<br>
+Ahoj Janko....<br>
+Ahoj Janko....<br>
+Ahoj Janko....<br>
+Ahoj Janko....<br>
+Ahoj Janko....<br>');
     }
 }

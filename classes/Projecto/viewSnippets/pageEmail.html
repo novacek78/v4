@@ -1,38 +1,42 @@
 <div class="row fillHeight">
 
     <div class="col-md-3 fillHeight">
-        <h3>Mailbox folders</h3>
+        <div class="h3">Mailboxes</div>
+        <div id="mailboxes-container" class="pre-scrollable">
 
-        <div class="pre-scrollable">
             {
             {
                 mailboxes
             }
             }
+
         </div>
     </div>
 
-    <div class="col-md-9">
-        <h3>Messages</h3>
+    <div class="col-md-9" style="height: 50%">
+        <div class="h3">Messages</div>
+        <div id="messages-container" class="pre-scrollable">
 
-        <div class="pre-scrollable">
             {
             {
                 messages
             }
             }
+
         </div>
     </div>
 
-    <div class="col-md-9">
-        <h3>Message body</h3>
+    <div class="col-md-9" style="height: 50%">
+        <div class="h3">Message body</div>
+        <div id="message-body-container" class="pre-scrollable email-body">
 
-        <div class="pre-scrollable email-body">
             {
             {
                 message_body
             }
             }
+
         </div>
     </div>
+
 </div>
