@@ -4,7 +4,7 @@ class Router
 {
 
     /**
-     * Router zisti podla dopytovanej URI ktory controller treba na obsluzenie - vrati jeho meno
+     * Router podla dopytovanej URI zisti, ktory controller treba na obsluzenie - vrati jeho meno
      *
      * @return string
      */

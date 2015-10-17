@@ -1,6 +1,6 @@
 <?php
 
-abstract class Admin_ControllerAbstract extends Controller
+abstract class Projecto_ControllerAbstract extends Controller
 {
 
     /**

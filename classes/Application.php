@@ -11,6 +11,9 @@ class Application
 
     public function run() {
 
+        Logger::info('', false);
+        Logger::info('App start...');
+
         session_start();
 
         $controllerName = Router::getControllerName();

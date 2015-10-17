@@ -6,31 +6,30 @@
  *
  * Class Admin_ControllerLogin
  */
-class Admin_ControllerLogin extends Controller
+class Projecto_ControllerLogin extends Controller
 {
 
     public function run() {
-
-        if (isset($_SESSION['isLoggedIn']) && ($_SESSION['isLoggedIn'] === true)) {
-            Request::redirect(Request::makeUriAbsolute());
-        }
 
         if (Request::isPost()) {
             $postData = Request::getPostData();
 
             if ($postData['formName'] == 'login') {
-                $User = new Admin_ModelUser();
+                $User = new Projecto_ModelUser();
 
                 if ($User->login($postData)) {
-                    Request::redirect(Request::makeUriAbsolute());
+                    Request::redirect(Request::makeUriAbsolute()); // default home page
                 } else {
                     Request::redirect(Request::makeUriAbsolute('login'));
                 }
             }
         }
 
+        if (isset($_SESSION['isLoggedIn']) && ($_SESSION['isLoggedIn'] === true)) {
+            Request::redirect(Request::makeUriAbsolute());
+        }
+
         $this->_setViewData('title', 'Prihlásenie');
         $this->_setViewData('formAction', Request::makeUriAbsolute('login'));
-
     }
 }

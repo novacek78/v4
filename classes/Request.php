@@ -33,6 +33,16 @@ class Request
     }
 
     /**
+     * Vrati pole POST dat, ktore prisli
+     *
+     * @return array
+     */
+    public static function getPostData() {
+
+        return $_POST;
+    }
+
+    /**
      * Povie, ci je aktualny request typu POST
      *
      * @return bool
@@ -45,17 +55,24 @@ class Request
         return (self::$_requestType == 'POST');
     }
 
-    public static function makeUri() {
+    public static function makeUriRelative() {
 
         $arrArgs = func_get_args();
-        return BASE_HREF . '/' . implode('/', $arrArgs);
+        return BASE_HREF . '' . implode('/', $arrArgs);
+    }
+
+    public static function makeUriAbsolute() {
+
+        $arrArgs = func_get_args();
+        return ((empty($_SERVER['HTTPS'])) ? 'http://' : 'https://') . $_SERVER['HTTP_HOST'] . BASE_HREF . '' . implode('/', $arrArgs);
     }
 
     public static function redirect($uri) {
 
-        $currentUri = BASE_HREF . '/' . self::getParam('uri', REQUEST_PARAM_STRING);
+        $currentUri = BASE_HREF . '' . self::getParam('uri', REQUEST_PARAM_STRING);
 
         if ($currentUri != $uri) { // aby nedoslo k zacyklenemu presmerovaniu napr. z 'login' na 'login'
+            Logger::info("Redirecting to: $uri....");
             header('Location: ' . $uri);
             exit;
         }
@@ -69,12 +86,12 @@ class Request
      * @param bool   $isRequired
      * @param string $regexp
      * @param mixed  $default
-     * @param bool   $isPost Ci to je POST parameter
+     * @param bool   $fromPost Ci to je POST parameter
      * @return mixed
      */
-    public static function getParam($paramName, $type, $isRequired = false, $regexp = '', $default = null, $isPost = false) {  // ak je regexp posielany sem v dvojitych uvodzovkach, musia sa escape znaky este raz escapovat !
+    public static function getParam($paramName, $type, $isRequired = false, $regexp = '', $default = null, $fromPost = false) {  // ak je regexp posielany sem v dvojitych uvodzovkach, musia sa escape znaky este raz escapovat !
 
-        $tmp = ($isPost) ? self::_getPost($paramName) : self::_getGet($paramName);
+        $tmp = ($fromPost) ? self::_getPost($paramName) : self::_getGet($paramName);
 
         if (isset($tmp) && ($regexp != '')) {
             if (preg_match($regexp, $tmp) !== 1) {
