@@ -1,7 +1,6 @@
 <?php
 
-class Projecto_ModelEmail
-{
+class Projecto_ModelEmail {
 
     /**
      * Vrati pole vsetkych najdenych mailboxov na emailovom konte
@@ -53,11 +52,43 @@ class Projecto_ModelEmail
 
     public function getFolderContents($folderName = null, $imapStream = null) {
 
-        if ($imapStream == null) $imapStream = $this->openMailbox();
+        if ($imapStream == null)
+            $imapStream = $this->openMailbox();
 
         if ($folderName) {
         }
 
-        return imap_headers($imapStream);
+        $Date = new DateTime();
+        $Date->sub(new DateInterval('P28D'));
+        $last28Days = $Date->format('j F Y');
+
+        $arrMessageUids = imap_search($imapStream, 'SINCE "' . $last28Days . '"', SE_UID);
+
+        // zoznam hlaviciek emailov v mailboxe
+        $imapHeaders = imap_fetch_overview($imapStream, $arrMessageUids[0] . ':' . $arrMessageUids[count($arrMessageUids) - 1], FT_UID);
+        $imapHeaders = array_reverse($imapHeaders); // aby najnovsie boli prve
+        imap_close($imapStream);
+
+        foreach ($imapHeaders as $key => $Header) {
+
+            $attr = array();
+            if ( ! $Header->seen) $attr[] = 'N';
+            if ( ! $Header->answered) $attr[] = 'A';
+            $Header->status = implode(',', $attr);
+
+            if (($pos = strpos($Header->date, '+')) !== false)
+                $Header->date = substr($Header->date, 0, $pos - 4);
+            if (($pos = strpos($Header->date, '-')) !== false)
+                $Header->date = substr($Header->date, 0, $pos - 4);
+            if (($pos = strpos($Header->date, ',')) !== false)
+                $Header->date = substr($Header->date, $pos + 2);
+            if (($pos = strpos($Header->date, '0')) === 0)
+                $Header->date = substr($Header->date, 1);
+
+            $Header->from = Utils::convertEncoding($Header->from);
+            $Header->subject = Utils::convertEncoding($Header->subject);
+        }
+
+        return $imapHeaders;
     }
 }

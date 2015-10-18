@@ -1,3 +1,30 @@
-<div class="fillHeight" style="background-color: #245269">
-    ahoj
+<div class="row fillHeight">
+
+    <div class="col-md-3 fillHeight">
+        <img src="images/logo-small.png">
+        <div id="projects-container" class="pre-scrollable">
+
+            {{projects}}
+
+        </div>
+    </div>
+
+    <div class="col-md-9" style="height: 50%">
+        <div class="h3">Project history</div>
+        <div id="history-container" class="pre-scrollable">
+
+            {{history}}
+
+        </div>
+    </div>
+
+    <div class="col-md-9" style="height: 50%">
+        <div class="h3">Details</div>
+        <div id="detail-container" class="pre-scrollable email-body">
+
+            {{detail}}
+
+        </div>
+    </div>
+
 </div>
