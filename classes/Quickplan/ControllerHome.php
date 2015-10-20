@@ -1,6 +1,6 @@
 <?php
 
-class Projecto_ControllerHome extends Projecto_ControllerAbstract
+class Quickplan_ControllerHome extends Quickplan_ControllerAbstract
 {
 
     public function run() {

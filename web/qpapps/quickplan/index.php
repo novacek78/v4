@@ -1,6 +1,6 @@
 <?php
 
-require '../../../init_projecto.php';
+require '../../../init_quickplan.php';
 
 try {
 

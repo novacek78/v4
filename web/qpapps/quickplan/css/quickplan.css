@@ -48,3 +48,37 @@ body {
     height: 100%;
     min-height: 100%;
 }
+
+tr.unseen > td {
+    font-weight: bold;
+}
+
+.text-disabled {
+    color: #888;
+}
+
+.text-alert {
+    color: #ff0000;
+}
+
+.rotate-90 {
+    /* Safari */
+    -webkit-transform: rotate(-90deg);
+    /* Firefox */
+    -moz-transform: rotate(-90deg);
+    /* IE */
+    -ms-transform: rotate(-90deg);
+    /* Opera */
+    -o-transform: rotate(-90deg);
+}
+
+.rotate-135 {
+    /* Safari */
+    -webkit-transform: rotate(-135deg);
+    /* Firefox */
+    -moz-transform: rotate(-135deg);
+    /* IE */
+    -ms-transform: rotate(-135deg);
+    /* Opera */
+    -o-transform: rotate(-135deg);
+}

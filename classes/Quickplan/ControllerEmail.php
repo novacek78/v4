@@ -1,11 +1,11 @@
 <?php
 
-class Projecto_ControllerEmail extends Projecto_ControllerAbstract
+class Quickplan_ControllerEmail extends Quickplan_ControllerAbstract
 {
 
     public function run() {
 
-        $Email = new Projecto_ModelEmail();
+        $Email = new Quickplan_ModelEmail();
         $folders = $Email->getFolders();
 
         $foldersHtml = "<table class='table table-hover'>\n";
@@ -35,13 +35,24 @@ class Projecto_ControllerEmail extends Projecto_ControllerAbstract
         // stiahne zoznam vsetkych sprav v mailboxe
         $arrHeaders = $Email->getFolderContents();
 
-        $msgsHtml = "<table class='table table-hover table-striped'>\n";
+        $msgsHtml = "<table class='table table-hover table-striped table-condensed'>\n";
         foreach ($arrHeaders as $Header) {
-            $msgsHtml .= "<tr><td>".$Header->status."</td><td>".$Header->date."</td><td>".$Header->from."</td><td>".$Header->subject."</td></tr>\n";
+
+            $trClass = $icon = '';
+            if (strpos($Header->status, 'N') !== false) {
+                $trClass = 'class="unseen"';
+                $icon = "<span title=\"New message\" class=\"glyphicon glyphicon-asterisk text-alert\" aria-hidden=\"true\"></span>";
+            }
+            if (strpos($Header->status, 'A') !== false) {
+                $trClass = '';
+                $icon = "<span title=\"Replied\" class=\"glyphicon glyphicon-share-alt rotate-135 text-disabled\" aria-hidden=\"true\"></span>";
+            }
+
+            $msgsHtml .= "<tr id=\"email_".$Header->uid."\" $trClass><td>$icon</td><td>".$Header->date."</td><td>".htmlspecialchars($Header->from)."</td><td>".htmlspecialchars($Header->subject)."</td></tr>\n";
         }
         $msgsHtml .= '</table>';
 
-        $this->_setViewData('title', 'Projecto:emails');
+        $this->_setViewData('title', 'QuickPlan - emails');
         $this->_setViewData('mailboxes', $foldersHtml);
         $this->_setViewData('messages', $msgsHtml);
         $this->_setViewData('message_body', 'Ahoj Janko....<br>
@@ -65,5 +76,8 @@ Ahoj Janko....<br>
 Ahoj Janko....<br>
 Ahoj Janko....<br>
 Ahoj Janko....<br>');
+
+        $this->_setViewData('ajax-url-get-email-body', Request::makeUriAbsolute('ajax', 'getEmailBody'));
+
     }
 }

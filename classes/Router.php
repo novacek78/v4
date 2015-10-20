@@ -11,7 +11,7 @@ class Router
     public static function getControllerName() {
 
         // vytiahneme z URL parameter 'uri', kde su ulozene vsetky slug parametre requestu
-        $uri = strtolower(Request::getParam('uri', REQUEST_PARAM_STRING));
+        $uri = strtolower(Request::getParamByName('uri', REQUEST_PARAM_STRING));
 
         $routes = unserialize(ROUTES);
 

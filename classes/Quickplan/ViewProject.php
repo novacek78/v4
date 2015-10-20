@@ -1,13 +1,13 @@
 <?php
 
-class Projecto_ViewLogin extends Projecto_ViewAbstract
+class Quickplan_ViewProject extends Quickplan_ViewAbstract
 {
 
     public function render() {
 
         $this->_renderSnippet('header');
 
-        $this->_renderSnippet('loginForm');
+        $this->_renderSnippet('pageProject');
 
         $this->_renderSnippet('footer');
     }

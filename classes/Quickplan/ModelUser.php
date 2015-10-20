@@ -1,6 +1,6 @@
 <?php
 
-class Projecto_ModelUser
+class Quickplan_ModelUser
 {
 
     public function login($data) {

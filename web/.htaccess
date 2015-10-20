@@ -10,8 +10,9 @@ RewriteCond %{REQUEST_URI} ^/adm [NC]
 #RewriteBase /qpapps/admin
 RewriteRule ^adm(/*)(.*) http://%{HTTP_HOST}/qpapps/admin?uri=$2 [R=307,L]
 
-#RewriteCond %{REQUEST_URI} ^/projecto [NC]
-#RewriteRule ^projecto(/*)(.*)$ http://%{HTTP_HOST}/qpapps/projecto?uri=$2 [R=307,L]
+# presmerovanie volani www.quickpanel.sk/quickplan --> www.quickpanel.sk/qpapps/quickplan
+RewriteCond %{REQUEST_URI} ^/quickplan [NC]
+RewriteRule ^quickplan(/*)(.*)$ http://%{HTTP_HOST}/qpapps/quickplan?uri=$2 [R=307,L]
 
 
 

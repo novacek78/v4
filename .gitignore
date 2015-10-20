@@ -8,3 +8,5 @@ logs-qp/
 bootstrap*
 glyphicons*
 
+# jQuery files
+jquery*

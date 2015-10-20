@@ -1,6 +1,6 @@
 <?php
 
-class Projecto_ModelEmail {
+class Quickplan_ModelEmail {
 
     /**
      * Vrati pole vsetkych najdenych mailboxov na emailovom konte
@@ -73,7 +73,7 @@ class Projecto_ModelEmail {
 
             $attr = array();
             if ( ! $Header->seen) $attr[] = 'N';
-            if ( ! $Header->answered) $attr[] = 'A';
+            if ( $Header->answered) $attr[] = 'A';
             $Header->status = implode(',', $attr);
 
             if (($pos = strpos($Header->date, '+')) !== false)
@@ -90,5 +90,18 @@ class Projecto_ModelEmail {
         }
 
         return $imapHeaders;
+    }
+
+    public function getEmailBody($uid, $imapStream = null) {
+
+        if ($imapStream == null)
+            $imapStream = $this->openMailbox();
+
+        $body = quoted_printable_decode(imap_body($imapStream, $uid, FT_UID));
+        //TODO dokoncit
+        //$body = mb_convert_encoding($body, 'utf-8', 'iso-8859-2');
+        imap_close($imapStream);
+
+        return $body;
     }
 }

@@ -3,7 +3,7 @@
 require 'init_common.php';
 
 // konfiguracia
-require 'config_projecto.php';
+require 'config_quickplan.php';
 
 // ine kniznice
 

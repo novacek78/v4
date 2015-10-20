@@ -1,11 +1,11 @@
 <?php
 
-class Projecto_ControllerProject extends Projecto_ControllerAbstract
+class Quickplan_ControllerProject extends Quickplan_ControllerAbstract
 {
 
     public function run() {
 
-        $this->_setViewData('title', 'Projecto:projects');
+        $this->_setViewData('title', 'QuickPlan - projects');
         $this->_setViewData('projects', '
         Project 01<br>
         Project 02<br>

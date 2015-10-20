@@ -6,7 +6,7 @@
  *
  * Class Admin_ControllerLogin
  */
-class Projecto_ControllerLogin extends Controller
+class Quickplan_ControllerLogin extends Controller
 {
 
     public function run() {
@@ -15,7 +15,7 @@ class Projecto_ControllerLogin extends Controller
             $postData = Request::getPostData();
 
             if ($postData['formName'] == 'login') {
-                $User = new Projecto_ModelUser();
+                $User = new Quickplan_ModelUser();
 
                 if ($User->login($postData)) {
                     Request::redirect(Request::makeUriAbsolute()); // default home page

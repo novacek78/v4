@@ -28,3 +28,18 @@
     </div>
 
 </div>
+
+<script>
+    $('td').click(function( event ) {
+        var Row = event.target.closest('tr');
+        var id  = Row.id;
+
+        if (id.indexOf('email_') > -1) {
+            id = id.substring(6);
+        }
+
+        $.ajax({url: "{{ajax-url-get-email-body}}", data: "uid="+id, success: function(result){
+            $("#message-body-container").html(result);
+        }});
+    });
+</script>

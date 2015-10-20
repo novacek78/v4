@@ -1,6 +1,6 @@
 <?php
 
-class Projecto_ViewEmail extends Projecto_ViewAbstract
+class Quickplan_ViewEmail extends Quickplan_ViewAbstract
 {
 
     public function render() {

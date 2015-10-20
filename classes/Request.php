@@ -69,7 +69,7 @@ class Request
 
     public static function redirect($uri) {
 
-        $currentUri = BASE_HREF . '' . self::getParam('uri', REQUEST_PARAM_STRING);
+        $currentUri = BASE_HREF . '' . self::getParamByName('uri', REQUEST_PARAM_STRING);
 
         if ($currentUri != $uri) { // aby nedoslo k zacyklenemu presmerovaniu napr. z 'login' na 'login'
             Logger::info("Redirecting to: $uri....");
@@ -89,7 +89,7 @@ class Request
      * @param bool   $fromPost Ci to je POST parameter
      * @return mixed
      */
-    public static function getParam($paramName, $type, $isRequired = false, $regexp = '', $default = null, $fromPost = false) {  // ak je regexp posielany sem v dvojitych uvodzovkach, musia sa escape znaky este raz escapovat !
+    public static function getParamByName($paramName, $type, $isRequired = false, $regexp = '', $default = null, $fromPost = false) {  // ak je regexp posielany sem v dvojitych uvodzovkach, musia sa escape znaky este raz escapovat !
 
         $tmp = ($fromPost) ? self::_getPost($paramName) : self::_getGet($paramName);
 
@@ -112,10 +112,16 @@ class Request
         if (isset($tmp)) {
             switch ($type) {
                 case REQUEST_PARAM_INT:
-                    $tmp = (int)$tmp;
+                    if (is_numeric($tmp))
+                        $tmp = (int)$tmp;
+                    else
+                        unset($tmp);
                     break;
                 case REQUEST_PARAM_FLOAT:
-                    $tmp = (float)$tmp;
+                    if (is_numeric($tmp))
+                        $tmp = (float)$tmp;
+                    else
+                        unset($tmp);
                     break;
                 case REQUEST_PARAM_STRING:
                     $tmp = (string)$tmp;
@@ -128,7 +134,7 @@ class Request
             }
         }
 
-        if ( ! isset($tmp) && isset($default))
+        if ( ! isset($tmp))
             $tmp = $default;
 
         return $tmp;
@@ -158,6 +164,21 @@ class Request
             return null;
     }
 
+    public static function getParamByNum($parNumber){
+
+        $uriParameter = self::getParamByName('uri', REQUEST_PARAM_STRING);
+
+        if (isset($uriParameter)) {
+            // rozparsujeme ho podla "/"
+            $arrSlugs = explode('/', $uriParameter);
+            $parNumber--; // prisposobenie sa polu - to je indexovane od 0
+            if (isset($arrSlugs[$parNumber]))
+                return $arrSlugs[$parNumber];
+        }
+
+        return false;
+    }
+
     /**
      * Vyhlada v GET/POST poli parameter daneho mena a nainicializuje ho do glob.pola $_PARAMS
      *
@@ -172,7 +193,7 @@ class Request
 
         global $_PARAMS;
 
-        $tmp = self::getParam($paramName, $type, $isRequired, $regexp, $default, $isPost);
+        $tmp = self::getParamByName($paramName, $type, $isRequired, $regexp, $default, $isPost);
 
         $_PARAMS[$paramName] = $tmp;
     }
