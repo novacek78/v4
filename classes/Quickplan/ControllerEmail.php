@@ -35,7 +35,7 @@ class Quickplan_ControllerEmail extends Quickplan_ControllerAbstract
         // stiahne zoznam vsetkych sprav v mailboxe
         $arrHeaders = $Email->getFolderContents();
 
-        $msgsHtml = "<table class='table table-hover table-striped table-condensed'>\n";
+        $msgsHtml = "<table class='table table-hover table-condensed'>\n";
         foreach ($arrHeaders as $Header) {
 
             $trClass = $icon = '';

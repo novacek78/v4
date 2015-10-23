@@ -1,4 +1,5 @@
 <?php
+define('ENV', 'production');
 
 define('APP_DIR', 'Quickplan/');
 define('CLASSES_PREFIX', 'Quickplan_');
@@ -9,6 +10,12 @@ define('IMAP_PORT', '993');
 define('IMAP_SSL', '/ssl/novalidate-cert');
 define('IMAP_USERNAME', 'info@quickpanel.sk');
 define('IMAP_PASSWORD', 'o[jRKpv@n3oFW9VtC');
+
+define('DB_HOST', 'localhost');
+define('DB_ENGINE', 'mysql');
+define('DB_NAME', 'quickplan');
+define('DB_USER', 'root');
+define('DB_PWD', '');
 
 // ------- routes -----------------------------------------------
 
@@ -25,6 +32,7 @@ $routes[$ctrl][] = 'login';
 
 $ctrl = 'Ajax';
 $routes[$ctrl][] = 'ajax/*';
+$routes[$ctrl][] = 'ajax/*/*';
 
 $ctrl = 'Home';
 $routes[$ctrl][] = '';

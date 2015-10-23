@@ -1,6 +1,6 @@
 <div class="row fillHeight">
 
-    <div class="col-md-3 fillHeight">
+    <div class="col-md-1 fillHeight">
         <div id="mailboxes-menu"><img src="images/logo-small.png"></div>
         <div id="mailboxes-container" class="pre-scrollable">
 
@@ -9,7 +9,7 @@
         </div>
     </div>
 
-    <div class="col-md-9" style="height: 50%">
+    <div class="col-md-5 fillHeight" style="height: 50%">
         <div id="messages-menu"></div>
         <div id="messages-container" class="pre-scrollable">
 
@@ -18,18 +18,33 @@
         </div>
     </div>
 
-    <div class="col-md-9" style="height: 50%">
-        <div id="message-body-menu"></div>
-        <div id="message-body-container" class="pre-scrollable">
+    <div class="col-md-6 fillHeight" style="height: 50%">
+        <div id="message-menu"></div>
+        <div id="message-container">
+            <div id="message-header">{
+            {
+                message_header
+            }
+            }</div>
+            <div id="message-body" class="pre-scrollable">
 
-            {{message_body}}
+                {{message_body}}
 
+            </div>
+            <div id="message-attachments">{
+            {
+                message_attachments
+            }
+            }</div>
         </div>
     </div>
 
 </div>
 
 <script>
+    var MessagesSelectedRow = null;
+    var messagesSelectedRowOriginalColor = null;
+
     $('td').click(function( event ) {
         var Row = event.target.closest('tr');
         var id  = Row.id;
@@ -39,7 +54,14 @@
         }
 
         $.ajax({url: "{{ajax-url-get-email-body}}", data: "uid="+id, success: function(result){
-            $("#message-body-container").html(result);
+            if (MessagesSelectedRow)
+                MessagesSelectedRow.style = "background-color: " + messagesSelectedRowOriginalColor;
+
+            MessagesSelectedRow = Row;
+            messagesSelectedRowOriginalColor = Row.style.backgroundColor;
+
+            Row.style = "background-color: #fefefe";
+            $("#message-body").html(result);
         }});
     });
 </script>

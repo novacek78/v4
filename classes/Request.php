@@ -141,7 +141,7 @@ class Request
     }
 
     /**
-     * @param $name
+     * @param string $name
      * @return null|string
      */
     private static function _getPost($name) {
@@ -153,7 +153,7 @@ class Request
     }
 
     /**
-     * @param $name
+     * @param string $name
      * @return null|string
      */
     private static function _getGet($name) {
@@ -164,6 +164,12 @@ class Request
             return null;
     }
 
+    /**
+     * Vrati jeden zo slugov parametra "uri" podla poradoveho cisla (cislovane od 1)
+     *
+     * @param int $parNumber
+     * @return bool|string
+     */
     public static function getParamByNum($parNumber){
 
         $uriParameter = self::getParamByName('uri', REQUEST_PARAM_STRING);

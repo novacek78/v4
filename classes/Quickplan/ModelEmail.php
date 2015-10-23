@@ -73,7 +73,7 @@ class Quickplan_ModelEmail {
 
             $attr = array();
             if ( ! $Header->seen) $attr[] = 'N';
-            if ( $Header->answered) $attr[] = 'A';
+            if ($Header->answered) $attr[] = 'A';
             $Header->status = implode(',', $attr);
 
             if (($pos = strpos($Header->date, '+')) !== false)
@@ -97,11 +97,84 @@ class Quickplan_ModelEmail {
         if ($imapStream == null)
             $imapStream = $this->openMailbox();
 
-        $body = quoted_printable_decode(imap_body($imapStream, $uid, FT_UID));
-        //TODO dokoncit
-        //$body = mb_convert_encoding($body, 'utf-8', 'iso-8859-2');
-        imap_close($imapStream);
+        //TODO zbavit sa tychto globalov
+        global $charset, $htmlmsg, $plainmsg, $attachments;
 
-        return $body;
+        $htmlmsg = $plainmsg = $charset = '';
+        $attachments = array();
+
+        // BODY
+        $struct = imap_fetchstructure($imapStream, $uid, FT_UID);
+        if ( ! $struct->parts)  // simple
+            $this->_getEmailPart($imapStream, $uid, $struct, 0);  // pass 0 as part-number
+        else {  // multipart: cycle through each part
+            foreach ($struct->parts as $partNo_0 => $p)
+                $this->_getEmailPart($imapStream, $uid, $p, $partNo_0 + 1);
+        }
+
+        return $htmlmsg;
+    }
+
+    private function _getEmailPart($imapStream, $uid, $p, $partno) {
+
+        // $partno = '1', '2', '2.1', '2.1.3', etc for multipart, 0 if simple
+        //TODO zbavit sa tychto globalov
+        global $htmlmsg, $plainmsg, $charset, $attachments;
+
+        // DECODE DATA
+        $data = ($partno) ?
+            imap_fetchbody($imapStream, $uid, $partno, FT_UID) :  // multipart
+            imap_body($imapStream, $uid, FT_UID);  // simple
+        // Any part may be encoded, even plain text messages, so check everything.
+        if ($p->encoding == 4)
+            $data = quoted_printable_decode($data);
+        elseif ($p->encoding == 3)
+            $data = base64_decode($data);
+
+        // PARAMETERS
+        // get all parameters, like charset, filenames of attachments, etc.
+        $params = array();
+        if (isset($p->parameters))
+            foreach ($p->parameters as $x)
+                $params[strtolower($x->attribute)] = $x->value;
+        if (isset($p->dparameters))
+            foreach ($p->dparameters as $x)
+                $params[strtolower($x->attribute)] = $x->value;
+
+        // ATTACHMENT
+        // Any part with a filename is an attachment,
+        // so an attached text file (type 0) is not mistaken as the message.
+        if (isset($params['filename']) || isset($params['name'])) {
+            // filename may be given as 'Filename' or 'Name' or both
+            $filename = (isset($params['filename'])) ? $params['filename'] : $params['name'];
+            // filename may be encoded, so see imap_mime_header_decode()
+            $attachments[$filename] = $data;  // this is a problem if two files have same name
+        }
+
+        // TEXT
+        if ($p->type == 0 && $data) {
+            // Messages may be split in different parts because of inline attachments,
+            // so append parts together with blank row.
+            if (strtolower($p->subtype) == 'plain')
+                $plainmsg .= trim($data) . "\n\n";
+            else
+                $htmlmsg .= $data . "<br><br>";
+            $charset = $params['charset'];  // assume all parts are same charset
+        }
+
+        // EMBEDDED MESSAGE
+        // Many bounce notifications embed the original message as type 2,
+        // but AOL uses type 1 (multipart), which is not handled here.
+        // There are no PHP functions to parse embedded messages,
+        // so this just appends the raw source to the main message.
+        elseif ($p->type == 2 && $data) {
+            $plainmsg .= $data . "\n\n";
+        }
+
+        // SUBPART RECURSION
+        if (isset($p->parts)) {
+            foreach ($p->parts as $partno0 => $p2)
+                $this->_getEmailPart($imapStream, $uid, $p2, $partno . '.' . ($partno0 + 1));  // 1.2, 1.2.1, etc.
+        }
     }
 }

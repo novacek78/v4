@@ -3,9 +3,17 @@
 class Quickplan_ControllerAjax extends Quickplan_ControllerAbstract
 {
 
+    /**
+     * Poradove cislo slugu GET parametra "uri" kde sa nachadza nazov metody
+     *
+     * @var int
+     */
+    private $_methodNameParameterNumber = 2;
+
+
     public function run() {
 
-        $methodName = Request::getParamByNum(2);
+        $methodName = Request::getParamByNum($this->_methodNameParameterNumber);
 
         if (method_exists($this, $methodName))
             $this->$methodName();

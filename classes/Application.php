@@ -16,6 +16,8 @@ class Application
 
         session_start();
 
+        Db::init(DB_NAME, DB_USER, DB_PWD, DB_HOST, DB_ENGINE);
+
         $controllerName = Router::getControllerName();
 
         // spustenie daneho kontrollera

@@ -63,6 +63,9 @@ abstract class View
                 foreach ($params as $paramName) {
                     if (isset($this->_data->$paramName)) {
                         $line = str_replace('{{' . $paramName . '}}', $this->_data->$paramName, $line);
+                    } else {
+                        if (ENV == 'production')
+                            $line = str_replace('{{' . $paramName . '}}', '', $line);
                     }
                 }
 

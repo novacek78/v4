@@ -9,6 +9,7 @@ body {
     background-color: #eee;
 }
 
+/* ----------- mailboxes list -------------- */
 #mailboxes-menu {
     height: 75px;
 }
@@ -16,22 +17,42 @@ body {
     height: calc(100% - 75px);
 }
 
+/* ------------ messages list ------------ */
 #messages-menu {
     height: 75px;
 }
 #messages-container {
     height: calc(100% - 75px);
+    border: 1px solid #ddd;
 }
 
-#message-body-menu {
+/* -------------- message ------------- */
+#message-menu {
     height: 75px;
 }
-#message-body-container {
-    height: calc(100% - 75px);
+
+#message-container {
+    height: calc(100% - 75px); /* 100% - menu */
+    border: 1px solid #ddd;
+}
+
+#message-header {
+    height: 50px;
+    border-bottom: 1px solid #ddd;
+}
+
+#message-body {
+    height: calc(100% - 50px - 50px); /* 100% - header - attachments */
     background-color: #fdfdfd;
     padding: 15px;
 }
 
+#message-attachments {
+    height: 50px;
+    border-top: 1px solid #ddd;
+}
+
+/* ------------ projects --------------- */
 #projects-container {
     height: calc(100% - 75px);
 }
