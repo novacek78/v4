@@ -3,11 +3,17 @@
 class Admin_ModelUser
 {
 
-    public function login($data) {
+    /**
+     * Prihlasi uzivatela do systemu
+     *
+     * @param stdClass $DataObj
+     * @return bool
+     */
+    public function login($DataObj) {
 
-        if ($data['username'] == 'enovacek@trionyx.sk') {
+        if ($DataObj->username == 'enovacek@trionyx.sk') {
             $_SESSION['isLoggedIn'] = true;
-            $_SESSION['loggedUsername'] = $data['username'];
+            $_SESSION['loggedUsername'] = $DataObj->username;
             return true;
         } else {
             return false;

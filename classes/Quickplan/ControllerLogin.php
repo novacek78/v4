@@ -12,12 +12,12 @@ class Quickplan_ControllerLogin extends Controller
     public function run() {
 
         if (Request::isPost()) {
-            $postData = Request::getPostData();
+            $PostData = Request::getPostData();
 
-            if ($postData['formName'] == 'login') {
+            if ($PostData->formName == 'login') {
                 $User = new Quickplan_ModelUser();
 
-                if ($User->login($postData)) {
+                if ($User->login($PostData)) {
                     Request::redirect(Request::makeUriAbsolute()); // default home page
                 } else {
                     Request::redirect(Request::makeUriAbsolute('login'));

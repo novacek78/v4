@@ -6,10 +6,23 @@ class Quickplan_ControllerEmail extends Quickplan_ControllerAbstract
     public function run() {
 
         $Email = new Quickplan_ModelEmail();
-        $folders = $Email->getFolders();
+
+        $this->_doMailboxList($Email);
+        $this->_doMessagesList($Email);
+
+        $this->_setViewData('title', 'QuickPlan - emails');
+        $this->_setViewData('ajax-url-get-email-body', Request::makeUriAbsolute('ajax', 'getEmailBody'));
+
+        $Email->closeMailServerConnection();
+    }
+
+
+    private function _doMailboxList($EmailModel) {
+
+        $folders = $EmailModel->getFolders();
 
         $foldersHtml = "<table class='table table-hover'>\n";
-        $foldersHtml .= "<tr><th>Folder</th><th>New</th></tr>\n";
+        $foldersHtml .= "<tr><th>Folder</th></tr>\n";
         $parents = array();
         foreach ($folders as $folder) {
 
@@ -27,13 +40,18 @@ class Quickplan_ControllerEmail extends Quickplan_ControllerAbstract
             }
 
             $rowClass = ($folder['newNum'] > 0) ? 'success' : '';
-            $unreadNum = ($folder['unreadNum'] > 0) ? "<strong>$folder[unreadNum]</strong>" : '';
-            $foldersHtml .= "<tr class='$rowClass'><td>$row</td><td>$unreadNum</td></tr>\n";
+            $unreadNum = ($folder['unreadNum'] > 0) ? "<strong>($folder[unreadNum])</strong>" : '';
+            $foldersHtml .= "<tr class='$rowClass'><td>$row $unreadNum</td></tr>\n";
         }
         $foldersHtml .= '</table>';
 
+        $this->_setViewData('mailboxes', $foldersHtml);
+    }
+
+    private function _doMessagesList($EmailModel) {
+
         // stiahne zoznam vsetkych sprav v mailboxe
-        $arrHeaders = $Email->getFolderContents();
+        $arrHeaders = $EmailModel->getFolderContents();
 
         $msgsHtml = "<table class='table table-hover table-condensed'>\n";
         foreach ($arrHeaders as $Header) {
@@ -48,36 +66,10 @@ class Quickplan_ControllerEmail extends Quickplan_ControllerAbstract
                 $icon = "<span title=\"Replied\" class=\"glyphicon glyphicon-share-alt rotate-135 text-disabled\" aria-hidden=\"true\"></span>";
             }
 
-            $msgsHtml .= "<tr id=\"email_".$Header->uid."\" $trClass><td>$icon</td><td>".$Header->date."</td><td>".htmlspecialchars($Header->from)."</td><td>".htmlspecialchars($Header->subject)."</td></tr>\n";
+            $msgsHtml .= "<tr id=\"email_" . $Header->uid . "\" $trClass><td>$icon</td><td>" . $Header->date . "</td><td>" . htmlspecialchars($Header->from) . "</td><td>" . htmlspecialchars($Header->subject) . "</td></tr>\n";
         }
         $msgsHtml .= '</table>';
 
-        $this->_setViewData('title', 'QuickPlan - emails');
-        $this->_setViewData('mailboxes', $foldersHtml);
         $this->_setViewData('messages', $msgsHtml);
-        $this->_setViewData('message_body', 'Ahoj Janko....<br>
-Ahoj Janko....<br>
-Ahoj Janko....<br>
-Ahoj Janko....<br>
-Ahoj Janko....<br>
-Ahoj Janko....<br>
-Ahoj Janko....<br>
-Ahoj Janko....<br>
-Ahoj Janko....<br>
-Ahoj Janko....<br>
-Ahoj Janko....<br>
-Ahoj Janko....<br>
-Ahoj Janko....<br>
-Ahoj Janko....<br>
-Ahoj Janko....<br>
-Ahoj Janko....<br>
-Ahoj Janko....<br>
-Ahoj Janko....<br>
-Ahoj Janko....<br>
-Ahoj Janko....<br>
-Ahoj Janko....<br>');
-
-        $this->_setViewData('ajax-url-get-email-body', Request::makeUriAbsolute('ajax', 'getEmailBody'));
-
     }
 }

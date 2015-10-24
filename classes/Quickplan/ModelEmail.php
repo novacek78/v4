@@ -2,6 +2,10 @@
 
 class Quickplan_ModelEmail {
 
+
+    private static $_mailServerConnection = null;
+
+
     /**
      * Vrati pole vsetkych najdenych mailboxov na emailovom konte
      *
@@ -10,7 +14,7 @@ class Quickplan_ModelEmail {
      */
     public function getFolders() {
 
-        $mbox = $this->openMailbox();
+        $mbox = $this->openMailServerConnection();
 
         $result = array();
 
@@ -30,30 +34,43 @@ class Quickplan_ModelEmail {
             Logger::error("imap_getmailboxes() failed: " . imap_last_error());
         }
 
-        imap_close($mbox);
+//        imap_close($mbox);
 
         return $result;
     }
 
-    public function openMailbox() {
+    public function openMailServerConnection() {
 
-        $return = imap_open(
-            '{' . IMAP_HOST . ':' . IMAP_PORT . '/imap' . IMAP_SSL . '}INBOX',
-            IMAP_USERNAME,
-            IMAP_PASSWORD,
-            OP_READONLY);
+        if ( ! isset(self::$_mailServerConnection)) {
 
-        if ($return === false) {
-            throw new Exception('Can not connect to IMAP server.');
-        } else {
-            return $return;
+            $connection = imap_open(
+                '{' . IMAP_HOST . ':' . IMAP_PORT . '/imap' . IMAP_SSL . '}INBOX',
+                IMAP_USERNAME,
+                IMAP_PASSWORD,
+                OP_READONLY);
+
+            if ($connection === false) {
+                throw new Exception('Can not connect to IMAP server.');
+            }
+
+            self::$_mailServerConnection = $connection;
+        }
+
+        return self::$_mailServerConnection;
+    }
+
+    public function closeMailServerConnection() {
+
+        if ( ! isset(self::$_mailServerConnection)) {
+            imap_close(self::$_mailServerConnection);
+            self::$_mailServerConnection = null;
         }
     }
 
     public function getFolderContents($folderName = null, $imapStream = null) {
 
         if ($imapStream == null)
-            $imapStream = $this->openMailbox();
+            $imapStream = $this->openMailServerConnection();
 
         if ($folderName) {
         }
@@ -67,7 +84,7 @@ class Quickplan_ModelEmail {
         // zoznam hlaviciek emailov v mailboxe
         $imapHeaders = imap_fetch_overview($imapStream, $arrMessageUids[0] . ':' . $arrMessageUids[count($arrMessageUids) - 1], FT_UID);
         $imapHeaders = array_reverse($imapHeaders); // aby najnovsie boli prve
-        imap_close($imapStream);
+//        imap_close($imapStream);
 
         foreach ($imapHeaders as $key => $Header) {
 
@@ -95,7 +112,7 @@ class Quickplan_ModelEmail {
     public function getEmailBody($uid, $imapStream = null) {
 
         if ($imapStream == null)
-            $imapStream = $this->openMailbox();
+            $imapStream = $this->openMailServerConnection();
 
         //TODO zbavit sa tychto globalov
         global $charset, $htmlmsg, $plainmsg, $attachments;

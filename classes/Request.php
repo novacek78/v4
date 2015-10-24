@@ -33,13 +33,33 @@ class Request
     }
 
     /**
-     * Vrati pole POST dat, ktore prisli
+     * Vrati objekt POST dat, ktore prisli
      *
-     * @return array
+     * @return stdClass
      */
     public static function getPostData() {
 
-        return $_POST;
+        $DataObj = new stdClass();
+
+        foreach ($_POST as $name => $value)
+            $DataObj->$name = $value;
+
+        return $DataObj;
+    }
+
+    /**
+     * Vrati objekt GET dat, ktore prisli
+     *
+     * @return stdClass
+     */
+    public static function getGetData() {
+
+        $DataObj = new stdClass();
+
+        foreach ($_GET as $name => $value)
+            $DataObj->$name = $value;
+
+        return $DataObj;
     }
 
     /**

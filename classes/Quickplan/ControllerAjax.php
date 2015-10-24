@@ -25,11 +25,13 @@ class Quickplan_ControllerAjax extends Quickplan_ControllerAbstract
 
     protected function getEmailBody() {
 
-        $emailUid = Request::getParamByName('uid', REQUEST_PARAM_INT);
-        if (isset($emailUid)) {
+        $Params = Request::getGetData();
+
+        if (isset($Params->uid)) {
 
             $EmailModel = new Quickplan_ModelEmail();
-            $body = $EmailModel->getEmailBody($emailUid);
+            $body = $EmailModel->getEmailBody($Params->uid);
+            $EmailModel->closeMailServerConnection();
 
             echo $body;
 

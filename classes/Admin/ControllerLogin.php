@@ -16,12 +16,12 @@ class Admin_ControllerLogin extends Controller
         }
 
         if (Request::isPost()) {
-            $postData = Request::getPostData();
+            $PostData = Request::getPostData();
 
-            if ($postData['formName'] == 'login') {
+            if ($PostData->formName == 'login') {
                 $User = new Admin_ModelUser();
 
-                if ($User->login($postData)) {
+                if ($User->login($PostData)) {
                     Request::redirect(Request::makeUriAbsolute());
                 } else {
                     Request::redirect(Request::makeUriAbsolute('login'));

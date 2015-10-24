@@ -3,11 +3,17 @@
 class Quickplan_ModelUser
 {
 
-    public function login($data) {
+    /**
+     * Prihlasi uzivatela do systemu
+     *
+     * @param stdClass $DataObj
+     * @return bool
+     */
+    public function login($DataObj) {
 
-        $dbData = $this->getUserData($data['username']);
+        $dbData = $this->getUserData($DataObj->username);
 
-        if ($dbData['login'] == $data['username']) {
+        if ($dbData['login'] == $DataObj->username) {
             $_SESSION['isLoggedIn'] = true;
             return true;
         } else {
