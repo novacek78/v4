@@ -9,12 +9,22 @@ body {
     background-color: #eee;
 }
 
+.fillHeight {
+    height: 100%;
+    min-height: 100%;
+}
+
+.contentHeight {
+    height: calc(100% - 55px);
+    min-height: calc(100% - 55px);
+}
+
 /* ----------- mailboxes list -------------- */
 #mailboxes-menu {
     height: 75px;
 }
 #mailboxes-container {
-    height: calc(100% - 75px);
+    height: calc(100% - 55px);
 }
 
 /* ------------ messages list ------------ */
@@ -22,7 +32,7 @@ body {
     height: 75px;
 }
 #messages-container {
-    height: calc(100% - 75px);
+    height: calc(100% - 55px);
     border: 1px solid #ddd;
 }
 
@@ -32,7 +42,7 @@ body {
 }
 
 #message-container {
-    height: calc(100% - 75px); /* 100% - menu */
+    height: calc(100% - 55px); /* 100% - menu */
     border: 1px solid #ddd;
 }
 
@@ -65,11 +75,6 @@ body {
     height: calc(100% - 75px);
 }
 
-.fillHeight {
-    height: 100%;
-    min-height: 100%;
-}
-
 tr.unseen > td {
     font-weight: bold;
 }
@@ -80,6 +85,10 @@ tr.unseen > td {
 
 .text-alert {
     color: #ff0000;
+}
+
+.menu-icon {
+    font-size: 200%;
 }
 
 .rotate-90 {

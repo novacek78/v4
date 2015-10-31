@@ -30,6 +30,9 @@ $routes[$ctrl][] = 'project';
 $ctrl = 'Login';
 $routes[$ctrl][] = 'login';
 
+$ctrl = 'Logout';
+$routes[$ctrl][] = 'logout';
+
 $ctrl = 'Ajax';
 $routes[$ctrl][] = 'ajax/*';
 $routes[$ctrl][] = 'ajax/*/*';

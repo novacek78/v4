@@ -102,11 +102,36 @@ class Quickplan_ModelImapServer {
             if (($pos = strpos($Header->date, '0')) === 0)
                 $Header->date = substr($Header->date, 1);
 
-            $Header->from = Utils::convertEncoding($Header->from);
-            $Header->subject = Utils::convertEncoding($Header->subject);
+            $Header->from = $this->headerConvertEncoding($Header->from);
+            $Header->subject = $this->headerConvertEncoding($Header->subject);
         }
 
         return $imapHeaders;
+    }
+
+    /**
+     * Prekonvertuje hlavicky do pozadovaneho kodovania
+     *
+     * @param string $text
+     * @param string $targetEncoding
+     * @return string
+     */
+    public function headerConvertEncoding($text, $targetEncoding = 'utf-8') {
+
+        $result = array();
+
+        $arr = imap_mime_header_decode($text);
+
+        foreach ($arr as $Part) {
+
+            if (($Part->charset != 'default') && (strtolower($Part->charset) != $targetEncoding)) {
+                $result[] = mb_convert_encoding($Part->text, $targetEncoding, $Part->charset);
+            } else {
+                $result[] = $Part->text;
+            }
+        }
+
+        return implode(' ', $result);
     }
 
     public function getEmailBody($uid, $imapStream = null) {
@@ -198,4 +223,5 @@ class Quickplan_ModelImapServer {
                 $this->_getEmailPart($imapStream, $uid, $p2, $partNumber . '.' . ($partno0 + 1));  // 1.2, 1.2.1, etc.
         }
     }
+
 }

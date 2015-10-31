@@ -1,7 +1,14 @@
 <div class="row fillHeight">
 
-    <div class="col-md-1 fillHeight">
-        <div id="mailboxes-menu"><img src="images/logo-small.png"></div>
+    <div class="col-md-12">
+        <div>
+            <img src="images/logo-small.png">
+            <a href="/quickplan/logout" class="menu-icon"><span title="Logout" class="glyphicon glyphicon-new-window" aria-hidden="true"></span></a>
+        </div>
+    </div>
+
+    <div class="col-md-1 contentHeight">
+        <div id="mailboxes-menu"></div>
         <div id="mailboxes-container" class="pre-scrollable">
 
             {{mailboxes}}
@@ -9,7 +16,7 @@
         </div>
     </div>
 
-    <div class="col-md-5 fillHeight" style="height: 50%">
+    <div class="col-md-5 contentHeight" style="height: 50%">
         <div id="messages-menu"></div>
         <div id="messages-container" class="pre-scrollable">
 
@@ -18,7 +25,7 @@
         </div>
     </div>
 
-    <div class="col-md-6 fillHeight" style="height: 50%">
+    <div class="col-md-6 contentHeight" style="height: 50%">
         <div id="message-menu"></div>
         <div id="message-container">
             <div id="message-header">
