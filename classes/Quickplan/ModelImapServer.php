@@ -1,6 +1,6 @@
 <?php
 
-class Quickplan_ModelEmail {
+class Quickplan_ModelImapServer {
 
 
     private static $_mailServerConnection = null;
@@ -115,47 +115,51 @@ class Quickplan_ModelEmail {
             $imapStream = $this->openMailServerConnection();
 
         //TODO zbavit sa tychto globalov
-        global $charset, $htmlmsg, $plainmsg, $attachments;
+        global $htmlmsg, $plainmsg, $attachments;
 
-        $htmlmsg = $plainmsg = $charset = '';
+        $htmlmsg = $plainmsg = '';
         $attachments = array();
 
         // BODY
         $struct = imap_fetchstructure($imapStream, $uid, FT_UID);
-        if ( ! $struct->parts)  // simple
+        if ( ! isset($struct->parts)) { // simple txt email
             $this->_getEmailPart($imapStream, $uid, $struct, 0);  // pass 0 as part-number
-        else {  // multipart: cycle through each part
+        } else {  // multipart: cycle through each part
             foreach ($struct->parts as $partNo_0 => $p)
                 $this->_getEmailPart($imapStream, $uid, $p, $partNo_0 + 1);
         }
 
-        return $htmlmsg;
+        if ( ! empty($htmlmsg))
+            return $htmlmsg;
+        else
+            return nl2br($plainmsg);
     }
 
-    private function _getEmailPart($imapStream, $uid, $p, $partno) {
+    private function _getEmailPart($imapStream, $uid, $emailPart, $partNumber) {
 
-        // $partno = '1', '2', '2.1', '2.1.3', etc for multipart, 0 if simple
+        // $partNumber = '1', '2', '2.1', '2.1.3', etc for multipart, 0 if simple
         //TODO zbavit sa tychto globalov
-        global $htmlmsg, $plainmsg, $charset, $attachments;
+        global $htmlmsg, $plainmsg, $attachments;
 
         // DECODE DATA
-        $data = ($partno) ?
-            imap_fetchbody($imapStream, $uid, $partno, FT_UID) :  // multipart
+        $data = ($partNumber) ?
+            imap_fetchbody($imapStream, $uid, $partNumber, FT_UID) :  // multipart
             imap_body($imapStream, $uid, FT_UID);  // simple
+
         // Any part may be encoded, even plain text messages, so check everything.
-        if ($p->encoding == 4)
+        if ($emailPart->encoding == 4)
             $data = quoted_printable_decode($data);
-        elseif ($p->encoding == 3)
+        elseif ($emailPart->encoding == 3)
             $data = base64_decode($data);
 
         // PARAMETERS
         // get all parameters, like charset, filenames of attachments, etc.
         $params = array();
-        if (isset($p->parameters))
-            foreach ($p->parameters as $x)
+        if (isset($emailPart->parameters))
+            foreach ($emailPart->parameters as $x)
                 $params[strtolower($x->attribute)] = $x->value;
-        if (isset($p->dparameters))
-            foreach ($p->dparameters as $x)
+        if (isset($emailPart->dparameters))
+            foreach ($emailPart->dparameters as $x)
                 $params[strtolower($x->attribute)] = $x->value;
 
         // ATTACHMENT
@@ -169,14 +173,14 @@ class Quickplan_ModelEmail {
         }
 
         // TEXT
-        if ($p->type == 0 && $data) {
+        if ($emailPart->type == 0 && $data) {
             // Messages may be split in different parts because of inline attachments,
             // so append parts together with blank row.
-            if (strtolower($p->subtype) == 'plain')
+            $data = mb_convert_encoding($data, 'utf-8', $params['charset']);
+            if (strtolower($emailPart->subtype) == 'plain')
                 $plainmsg .= trim($data) . "\n\n";
             else
                 $htmlmsg .= $data . "<br><br>";
-            $charset = $params['charset'];  // assume all parts are same charset
         }
 
         // EMBEDDED MESSAGE
@@ -184,14 +188,14 @@ class Quickplan_ModelEmail {
         // but AOL uses type 1 (multipart), which is not handled here.
         // There are no PHP functions to parse embedded messages,
         // so this just appends the raw source to the main message.
-        elseif ($p->type == 2 && $data) {
+        if ($emailPart->type == 2 && $data) {
             $plainmsg .= $data . "\n\n";
         }
 
         // SUBPART RECURSION
-        if (isset($p->parts)) {
-            foreach ($p->parts as $partno0 => $p2)
-                $this->_getEmailPart($imapStream, $uid, $p2, $partno . '.' . ($partno0 + 1));  // 1.2, 1.2.1, etc.
+        if (isset($emailPart->parts)) {
+            foreach ($emailPart->parts as $partno0 => $p2)
+                $this->_getEmailPart($imapStream, $uid, $p2, $partNumber . '.' . ($partno0 + 1));  // 1.2, 1.2.1, etc.
         }
     }
 }

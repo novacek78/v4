@@ -1,7 +1,6 @@
 <?php
 
-class Quickplan_ModelUser
-{
+class Quickplan_ModelUser {
 
     /**
      * Prihlasi uzivatela do systemu
@@ -13,12 +12,12 @@ class Quickplan_ModelUser
 
         $dbData = $this->getUserData($DataObj->username);
 
-        if ($dbData['login'] == $DataObj->username) {
+        if ( ! empty($dbData) && ($dbData['login'] == $DataObj->username)) {
             $_SESSION['isLoggedIn'] = true;
             return true;
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     public function getUserData($loginName) {

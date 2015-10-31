@@ -37,8 +37,7 @@ class Db {
      */
     public static function fetchAll($sql, $externalData = null) {
 
-        if ( ! isset(self::$_connection))
-            self::_connect();
+        self::_connect();
 
         if (isset($externalData)) {
 
@@ -57,6 +56,9 @@ class Db {
     }
 
     private static function _connect() {
+
+        if ( isset(self::$_connection))
+            return;
 
         self::$_connection = new PDO(
             self::$_dbEngine .
@@ -79,8 +81,7 @@ class Db {
      */
     public static function exec($sql, $externalData = null) {
 
-        if ( ! isset(self::$_connection))
-            self::_connect();
+        self::_connect();
 
         if (isset($externalData) && ! is_array($externalData))
             $externalData = array($externalData);
@@ -96,8 +97,7 @@ class Db {
      */
     public static function lastInsertId() {
 
-        if ( ! isset(self::$_connection))
-            self::_connect();
+        self::_connect();
 
         return self::$_connection->lastInsertId();
     }

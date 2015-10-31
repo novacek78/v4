@@ -56,8 +56,10 @@ class Request
 
         $DataObj = new stdClass();
 
-        foreach ($_GET as $name => $value)
-            $DataObj->$name = $value;
+        foreach ($_GET as $name => $value) {
+            if ($value != '')
+                $DataObj->$name = $value;
+        }
 
         return $DataObj;
     }

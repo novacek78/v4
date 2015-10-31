@@ -29,9 +29,9 @@ class Quickplan_ControllerAjax extends Quickplan_ControllerAbstract
 
         if (isset($Params->uid)) {
 
-            $EmailModel = new Quickplan_ModelEmail();
-            $body = $EmailModel->getEmailBody($Params->uid);
-            $EmailModel->closeMailServerConnection();
+            $ImapServer = new Quickplan_ModelImapServer();
+            $body = $ImapServer->getEmailBody($Params->uid);
+            $ImapServer->closeMailServerConnection();
 
             echo $body;
 

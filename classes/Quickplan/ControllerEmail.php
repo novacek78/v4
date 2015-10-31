@@ -5,21 +5,21 @@ class Quickplan_ControllerEmail extends Quickplan_ControllerAbstract
 
     public function run() {
 
-        $Email = new Quickplan_ModelEmail();
+        $ImapSrvr = new Quickplan_ModelImapServer();
 
-        $this->_doMailboxList($Email);
-        $this->_doMessagesList($Email);
+        $this->_doMailboxList($ImapSrvr);
+        $this->_doMessagesList($ImapSrvr);
 
         $this->_setViewData('title', 'QuickPlan - emails');
         $this->_setViewData('ajax-url-get-email-body', Request::makeUriAbsolute('ajax', 'getEmailBody'));
 
-        $Email->closeMailServerConnection();
+        $ImapSrvr->closeMailServerConnection();
     }
 
 
-    private function _doMailboxList($EmailModel) {
+    private function _doMailboxList($ImapSrvr) {
 
-        $folders = $EmailModel->getFolders();
+        $folders = $ImapSrvr->getFolders();
 
         $foldersHtml = "<table class='table table-hover'>\n";
         $foldersHtml .= "<tr><th>Folder</th></tr>\n";
@@ -48,10 +48,10 @@ class Quickplan_ControllerEmail extends Quickplan_ControllerAbstract
         $this->_setViewData('mailboxes', $foldersHtml);
     }
 
-    private function _doMessagesList($EmailModel) {
+    private function _doMessagesList($ImapSrvr) {
 
         // stiahne zoznam vsetkych sprav v mailboxe
-        $arrHeaders = $EmailModel->getFolderContents();
+        $arrHeaders = $ImapSrvr->getFolderContents();
 
         $msgsHtml = "<table class='table table-hover table-condensed'>\n";
         foreach ($arrHeaders as $Header) {
