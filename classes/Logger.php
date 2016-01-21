@@ -4,9 +4,10 @@ class Logger
 {
 
 
-    public static function info($data, $withTimestamp = true) {
+    public static function debug($data, $withTimestamp = true) {
 
-        self::_log($data, 'inf', $withTimestamp);
+        if (ENV == 'development')
+            self::_log($data, 'dbg', $withTimestamp);
     }
 
     private static function _log($data, $level, $withTimestamp) {
@@ -36,6 +37,11 @@ class Logger
         } catch (Exception $e) {
         }
 //        LogTxt(' [ERROR] ' . $what);
+    }
+
+    public static function info($data, $withTimestamp = true) {
+
+        self::_log($data, 'inf', $withTimestamp);
     }
 
     public static function error($data, $withTimestamp = true) {

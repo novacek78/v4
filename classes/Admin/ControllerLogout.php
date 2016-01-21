@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Class Quickplan_ControllerLogout
+ * Class Admin_ControllerLogout
  */
-class Quickplan_ControllerLogout extends Quickplan_ControllerAbstract
+class Admin_ControllerLogout extends Admin_ControllerAbstract
 {
 
     public function run() {

@@ -66,7 +66,9 @@ class Quickplan_ControllerEmail extends Quickplan_ControllerAbstract
                 $icon = "<span title=\"Replied\" class=\"glyphicon glyphicon-share-alt rotate-135 text-disabled\" aria-hidden=\"true\"></span>";
             }
 
-            $msgsHtml .= "<tr id=\"email_" . $Header->uid . "\" $trClass><td>$icon</td><td>" . $Header->date . "</td><td>" . htmlspecialchars($Header->from) . "</td><td>" . htmlspecialchars($Header->subject) . "</td></tr>\n";
+            $MsgDate = new DateTime($Header->date);
+
+            $msgsHtml .= "<tr id=\"email_" . $Header->uid . "\" $trClass><td>$icon</td><td>" . $MsgDate->format('d.m.y&\n\b\s\p;H:i') . "</td><td>" . htmlspecialchars($Header->from) . "</td><td>" . htmlspecialchars($Header->subject) . "</td></tr>\n";
         }
         $msgsHtml .= '</table>';
 

@@ -21,28 +21,29 @@ body {
 
 /* ----------- mailboxes list -------------- */
 #mailboxes-menu {
-    height: 75px;
+    height: 45px;
+    margin-left: 5px;
 }
 #mailboxes-container {
-    height: calc(100% - 55px);
+    height: calc(100% - 25px);
 }
 
 /* ------------ messages list ------------ */
 #messages-menu {
-    height: 75px;
+    height: 45px;
 }
 #messages-container {
-    height: calc(100% - 55px);
+    height: calc(100% - 25px);
     border: 1px solid #ddd;
 }
 
 /* -------------- message ------------- */
 #message-menu {
-    height: 75px;
+    height: 45px;
 }
 
 #message-container {
-    height: calc(100% - 55px); /* 100% - menu */
+    height: calc(100% - 25px); /* 100% - menu */
     border: 1px solid #ddd;
 }
 
@@ -88,7 +89,28 @@ tr.unseen > td {
 }
 
 .menu-icon {
+    color: #c0c0c0;
     font-size: 200%;
+    padding: 10px 10px 5px 10px;
+    border: 1px solid;
+    border-color: #eee #ccc #ccc #eee;
+}
+
+.icon-highlight{
+    color: #eee;
+    background-color: #c0c0c0;
+    border-color: #999 #eee #eee #999;
+}
+
+.rotate-45 {
+    /* Safari */
+    -webkit-transform: rotate(-45deg);
+    /* Firefox */
+    -moz-transform: rotate(-45deg);
+    /* IE */
+    -ms-transform: rotate(-45deg);
+    /* Opera */
+    -o-transform: rotate(-45deg);
 }
 
 .rotate-90 {

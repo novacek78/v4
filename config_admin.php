@@ -2,7 +2,13 @@
 
 define('APP_DIR', 'Admin/');
 define('CLASSES_PREFIX', 'Admin_');
-define('BASE_HREF', '/adm');
+define('BASE_HREF', '/qpapps/admin/?uri=');
+
+define('DB_HOST', 'localhost');
+define('DB_ENGINE', 'mysql');
+define('DB_NAME', 'quickpanel');
+define('DB_USER', 'root');
+define('DB_PWD', '');
 
 
 // ------- routes -----------------------------------------------
@@ -18,6 +24,9 @@ $routes[$ctrl][] = 'orders/delete/*';
 
 $ctrl = 'Login';
 $routes[$ctrl][] = 'login';
+
+$ctrl = 'Logout';
+$routes[$ctrl][] = 'logout';
 
 $ctrl = 'Utils';
 $routes[$ctrl][] = 'tmppanels';

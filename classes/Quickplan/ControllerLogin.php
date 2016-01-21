@@ -18,8 +18,10 @@ class Quickplan_ControllerLogin extends Controller
                 $User = new Quickplan_ModelUser();
 
                 if ($User->login($PostData)) {
+                    Logger::debug('User logged in.');
                     Request::redirect(Request::makeUriAbsolute()); // default home page
                 } else {
+                    Logger::debug("User login failed ({$PostData->formName})");
                     Request::redirect(Request::makeUriAbsolute('login'));
                 }
             }

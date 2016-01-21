@@ -1,6 +1,4 @@
 <?php
-define('ENV', 'production');
-
 define('APP_DIR', 'Quickplan/');
 define('CLASSES_PREFIX', 'Quickplan_');
 define('BASE_HREF', '/qpapps/quickplan/?uri=');

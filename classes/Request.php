@@ -94,7 +94,7 @@ class Request
         $currentUri = BASE_HREF . '' . self::getParamByName('uri', REQUEST_PARAM_STRING);
 
         if ($currentUri != $uri) { // aby nedoslo k zacyklenemu presmerovaniu napr. z 'login' na 'login'
-            Logger::info("Redirecting to: $uri....");
+            Logger::info("Redirecting to: $uri");
             header('Location: ' . $uri);
             exit;
         }

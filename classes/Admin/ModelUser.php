@@ -11,7 +11,7 @@ class Admin_ModelUser
      */
     public function login($DataObj) {
 
-        if ($DataObj->username == 'enovacek@trionyx.sk') {
+        if ($DataObj->username == 'enovacek@quickpanel.sk') {
             $_SESSION['isLoggedIn'] = true;
             $_SESSION['loggedUsername'] = $DataObj->username;
             return true;

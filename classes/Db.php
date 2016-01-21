@@ -13,20 +13,11 @@ class Db {
      */
     private static $_connection = null;
 
-    private static $_dbEngine = '';
-    private static $_dbHost = '';
-    private static $_dbName = '';
-    private static $_dbUser = '';
-    private static $_dbPwd = '';
-
-    public static function init($dbName, $userName, $pwd, $dbHost, $dbEngine) {
-
-        self::$_dbHost = $dbHost;
-        self::$_dbEngine = $dbEngine;
-        self::$_dbName = $dbName;
-        self::$_dbUser = $userName;
-        self::$_dbPwd = $pwd;
-    }
+    private static $_dbEngine = null;
+    private static $_dbHost = null;
+    private static $_dbName = null;
+    private static $_dbUser = null;
+    private static $_dbPwd = null;
 
     /**
      * Vykona SQL dotaz a vrati pole vysledkov
@@ -60,6 +51,9 @@ class Db {
         if ( isset(self::$_connection))
             return;
 
+        if (empty(self::$_dbHost))
+            self::init(DB_NAME, DB_USER, DB_PWD, DB_HOST, DB_ENGINE);
+
         self::$_connection = new PDO(
             self::$_dbEngine .
             ':host=' . self::$_dbHost .
@@ -71,6 +65,15 @@ class Db {
                 PDO::ATTR_PERSISTENT => true,
                 PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
                 PDO::ATTR_EMULATE_PREPARES => false));
+    }
+
+    public static function init($dbName, $userName, $pwd, $dbHost, $dbEngine) {
+
+        self::$_dbHost = $dbHost;
+        self::$_dbEngine = $dbEngine;
+        self::$_dbName = $dbName;
+        self::$_dbUser = $userName;
+        self::$_dbPwd = $pwd;
     }
 
     /**

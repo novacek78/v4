@@ -11,7 +11,7 @@ define('REQUEST_PARAM_STRING', 1);
 define('REQUEST_PARAM_INT', 2);
 define('REQUEST_PARAM_FLOAT', 3);
 
-// cislo aktualnej verzie softu
+// cislo aktualnej verzie QuickPanel softu
 define('VERSION_MAJOR', '1');
 define('VERSION_MINOR', '1');
 define('VERSION_RELEASE', '4');

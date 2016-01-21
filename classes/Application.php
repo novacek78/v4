@@ -12,18 +12,19 @@ class Application
     public function run() {
 
         Logger::info('', false);
+
+        $protocol = empty($_SERVER['HTTPS']) ? 'http://' : 'https://';
+        Logger::debug( $_SERVER['REQUEST_METHOD'] . " " . $protocol . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI']);
+
         Logger::info('App start...');
 
         session_start();
 
-        Db::init(DB_NAME, DB_USER, DB_PWD, DB_HOST, DB_ENGINE);
+        // zistenie a spustenie daneho kontrolera
+        $controllerName = CLASSES_PREFIX . "Controller" . Router::getControllerName();
 
-        $controllerName = Router::getControllerName();
-
-        // spustenie daneho kontrollera
-        $controllerName = CLASSES_PREFIX . "Controller" . $controllerName;
         if (class_exists($controllerName)) {
-
+            Logger::debug("Loading controller $controllerName...");
             $this->_Controller = new $controllerName();
             $this->_Controller->run();
             $this->_Controller->render();
