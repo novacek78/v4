@@ -19,7 +19,7 @@ class Admin_ControllerLogin extends Controller
 
                 if ($User->login($PostData)) {
                     Logger::debug('User logged in.');
-                    Request::redirect(Request::makeUriAbsolute()); // default home page
+                    Request::redirect(Request::makeUriAbsolute('orders', 'open')); // default home page
                 } else {
                     Logger::debug("User login failed ({$PostData->formName})");
                     Request::redirect(Request::makeUriAbsolute('login'));

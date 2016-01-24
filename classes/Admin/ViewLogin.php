@@ -7,7 +7,7 @@ class Admin_ViewLogin extends Admin_ViewAbstract
 
         $this->_renderSnippet('loginHeader');
 
-        $this->_renderSnippet('loginBody');
+        $this->_renderSnippet('login');
 
         $this->_renderSnippet('loginFooter');
     }
