@@ -25,6 +25,8 @@ abstract class Controller
 
     public function render() {
 
+        $this->_setViewData('base_href', BASE_HREF);
+
         if ( ! isset($this->_View)) {
             // potrebujeme z nazvu ako 'Admin_ControllerLogin'  vyrobit 'Admin_ViewLogin'
             $viewName = str_replace('Controller', 'View', get_class($this));

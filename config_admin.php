@@ -2,10 +2,19 @@
 
 define('APP_DIR', 'Admin/');
 define('CLASSES_PREFIX', 'Admin_');
-define('BASE_HREF', '/qpapps/admin/?uri=');
 
 switch (ENV){
+    case 'production':
+        define('BASE_HREF', 'http://spapajma.sk/qpapps/admin/');
+        define('DB_HOST', 'localhost');
+        define('DB_ENGINE', 'mysql');
+        define('DB_NAME', 'qp_test');
+        define('DB_USER', 'qp_test');
+        define('DB_PWD', 'matahari');
+        break;
+
     case 'testing':
+        define('BASE_HREF', 'http://quickpanel.local/qpapps/admin/');
         define('DB_HOST', 'localhost');
         define('DB_ENGINE', 'mysql');
         define('DB_NAME', 'qp_test');
@@ -14,6 +23,7 @@ switch (ENV){
         break;
 
     case 'development':
+        define('BASE_HREF', 'http://quickpanel.local/qpapps/admin/');
         define('DB_HOST', 'localhost');
         define('DB_ENGINE', 'mysql');
         define('DB_NAME', 'qp_local');
