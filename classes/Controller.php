@@ -25,7 +25,7 @@ abstract class Controller
 
     public function render() {
 
-        $this->_setViewData('base_href', BASE_HREF);
+        $this->_setViewData('base_href', Request::makeUriAbsolute());
 
         if ( ! isset($this->_View)) {
             // potrebujeme z nazvu ako 'Admin_ControllerLogin'  vyrobit 'Admin_ViewLogin'

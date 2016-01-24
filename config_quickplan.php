@@ -1,19 +1,53 @@
 <?php
 define('APP_DIR', 'Quickplan/');
 define('CLASSES_PREFIX', 'Quickplan_');
+
 define('BASE_HREF', '/qpapps/quickplan/?uri=');
 
-define('IMAP_HOST', 'imap.quickpanel.sk');
-define('IMAP_PORT', '993');
-define('IMAP_SSL', '/ssl/novalidate-cert');
-define('IMAP_USERNAME', 'info@quickpanel.sk');
-define('IMAP_PASSWORD', 'o[jRKpv@n3oFW9VtC');
 
-define('DB_HOST', 'localhost');
-define('DB_ENGINE', 'mysql');
-define('DB_NAME', 'quickplan');
-define('DB_USER', 'root');
-define('DB_PWD', '');
+switch (ENV){
+    case 'production':
+        define('DB_HOST', 'localhost');
+        define('DB_ENGINE', 'mysql');
+        define('DB_NAME', 'quickplan');
+        define('DB_USER', 'root');
+        define('DB_PWD', '');
+
+        define('IMAP_HOST', 'imap.quickpanel.sk');
+        define('IMAP_PORT', '993');
+        define('IMAP_SSL', '/ssl/novalidate-cert');
+        define('IMAP_USERNAME', 'info@quickpanel.sk');
+        define('IMAP_PASSWORD', 'o[jRKpv@n3oFW9VtC');
+        break;
+
+    case 'testing':
+        define('DB_HOST', 'localhost');
+        define('DB_ENGINE', 'mysql');
+        define('DB_NAME', 'quickplan');
+        define('DB_USER', 'root');
+        define('DB_PWD', '');
+
+        define('IMAP_HOST', 'imap.quickpanel.sk');
+        define('IMAP_PORT', '993');
+        define('IMAP_SSL', '/ssl/novalidate-cert');
+        define('IMAP_USERNAME', 'info@quickpanel.sk');
+        define('IMAP_PASSWORD', 'o[jRKpv@n3oFW9VtC');
+        break;
+
+    case 'development':
+        define('DB_HOST', 'localhost');
+        define('DB_ENGINE', 'mysql');
+        define('DB_NAME', 'quickplan');
+        define('DB_USER', 'root');
+        define('DB_PWD', '');
+
+        define('IMAP_HOST', 'imap.quickpanel.sk');
+        define('IMAP_PORT', '993');
+        define('IMAP_SSL', '/ssl/novalidate-cert');
+        define('IMAP_USERNAME', 'info@quickpanel.sk');
+        define('IMAP_PASSWORD', 'o[jRKpv@n3oFW9VtC');
+        break;
+}
 
 // ------- routes -----------------------------------------------
 
