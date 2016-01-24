@@ -1,0 +1,60 @@
+<!-- BEGIN : LOGIN PAGE 5-1 -->
+<div class="user-login-5">
+    <div class="row bs-reset">
+        <div class="col-md-6 bs-reset">
+            <div class="login-bg" style="background-image:url(../assets/pages/img/login/bg1.jpg)"> </div>
+        </div>
+        <div class="col-md-6 login-container bs-reset">
+            <div class="login-content">
+                <img class="login-logo" src="../assets/pages/img/login/logo.png" alt="QuickPanel logo" />
+                <h1>Správa objednávok</h1>
+                <p> Tu je možné spravovať si svoje objednávky a sledovať ich stav.<br> Prihlásite sa svojim e-mailom, na ktorý ste v QuickPanel zaregistrovaný a registračným kódom, ktorý ste zadávali aj do aplikácie QuickPanel.</p>
+                <form action="{{formAction}}" class="login-form" method="post">
+                    <input type="hidden" name="formName" value="login" />
+                    <div class="alert alert-danger display-hide">
+                        <button class="close" data-close="alert"></button>
+                        <span>Zadajte zaregistrovný e-mail a heslo je Váš registračný kód. </span>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <input class="form-control form-control-solid placeholder-no-fix form-group" type="text" autocomplete="off" placeholder="E-mail" name="username" required/> </div>
+                        <div class="col-xs-6">
+                            <input class="form-control form-control-solid placeholder-no-fix form-group" type="password" autocomplete="off" placeholder="Reg. kód" name="password" required/> </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="rem-password">
+                                <!--
+                                <p>Pamätať si prihlásenie
+                                    <input type="checkbox" class="rem-checkbox" />
+                                </p>
+                                -->
+                            </div>
+                        </div>
+                        <div class="col-sm-8 text-right">
+                            <div class="forgot-password">
+                                <a href="javascript:;" id="forget-password" class="forget-password">Nepoznáte Váš registračný kód?</a>
+                            </div>
+                            <button class="btn blue" type="submit">Prihlásiť</button>
+                        </div>
+                    </div>
+                </form>
+                <!-- BEGIN FORGOT PASSWORD FORM -->
+                <form class="forget-form" action="javascript:alert('Este nie je funkcne, prosim napiste nam email.');" method="post">
+                    <h3 class="font-green">Stratili ste registračný kód ?</h3>
+                    <p> Nižšie zadajte e-mailovú adresu, na ktorú ste sa v QuickPanel registrovali a kód Vám zašleme. </p>
+                    <div class="form-group">
+                        <input class="form-control placeholder-no-fix form-group" type="text" autocomplete="off" placeholder="E-mail" name="email" /> </div>
+                    <div class="form-actions">
+                        <button type="button" id="back-btn" class="btn grey btn-default">Späť</button>
+                        <button type="submit" class="btn blue btn-success uppercase pull-right">Odoslať</button>
+                    </div>
+                </form>
+                <!-- END FORGOT PASSWORD FORM -->
+            </div>
+            <div class="login-footer">
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END : LOGIN PAGE 5-1 -->

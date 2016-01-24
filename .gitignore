@@ -10,3 +10,7 @@ glyphicons*
 
 # jQuery files
 jquery*
+
+# kupena sablona
+/web/qpapps/admin/metronic
+/web/qpapps/assets

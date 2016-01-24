@@ -7,9 +7,12 @@ class Application
      * @var Controller
      */
     private $_Controller;
+    private $_Timestamp;
 
 
     public function run() {
+
+        if (ENV == 'development') $this->_Timestamp = microtime(true);
 
         Logger::info('', false);
 
@@ -31,5 +34,10 @@ class Application
         } else {
             throw new Exception('Unknown controller: ' . $controllerName);
         }
+
+        if (ENV == 'development') {
+            Logger::debug("Generated in " . round((microtime(true) - $this->_Timestamp)*1000) . " msec.");
+        }
+
     }
 }

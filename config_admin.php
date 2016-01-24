@@ -4,11 +4,23 @@ define('APP_DIR', 'Admin/');
 define('CLASSES_PREFIX', 'Admin_');
 define('BASE_HREF', '/qpapps/admin/?uri=');
 
-define('DB_HOST', 'localhost');
-define('DB_ENGINE', 'mysql');
-define('DB_NAME', 'quickpanel');
-define('DB_USER', 'root');
-define('DB_PWD', '');
+switch (ENV){
+    case 'testing':
+        define('DB_HOST', 'localhost');
+        define('DB_ENGINE', 'mysql');
+        define('DB_NAME', 'qp_test');
+        define('DB_USER', 'qp_test');
+        define('DB_PWD', 'matahari');
+        break;
+
+    case 'development':
+        define('DB_HOST', 'localhost');
+        define('DB_ENGINE', 'mysql');
+        define('DB_NAME', 'qp_local');
+        define('DB_USER', 'root');
+        define('DB_PWD', '');
+        break;
+}
 
 
 // ------- routes -----------------------------------------------

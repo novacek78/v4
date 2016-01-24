@@ -66,6 +66,8 @@ abstract class View
                     } else {
                         if (ENV == 'production')
                             $line = str_replace('{{' . $paramName . '}}', '', $line);
+                        else
+                            $line = str_replace('{{' . $paramName . '}}', "Data '$paramName' not set!'", $line);
                     }
                 }
 

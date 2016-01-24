@@ -10,6 +10,7 @@ try {
 
     $userRandomId = uniqid();
     Logger::error("Error ID: $userRandomId");
+    Logger::error("ENV: " . ENV);
     Logger::error($e->getMessage());
     Logger::error("    URL request: $_SERVER[SERVER_NAME]$_SERVER[REQUEST_URI]");
     $errorMsg = 'Chyba, kontaktujte prosim administratora s tymto kodom: ' . $userRandomId;

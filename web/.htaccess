@@ -6,9 +6,9 @@ RewriteEngine on
 
 # presmerovanie volani www.quickpanel.sk/adm --> www.quickpanel.sk/qpapps/admin
 # a pripadne dalsie slugy sa odovzdaju v GET parametri 'uri'
-RewriteCond %{REQUEST_URI} ^/adm [NC]
+RewriteCond %{REQUEST_URI} ^/admin [NC]
 #RewriteBase /qpapps/admin
-RewriteRule ^adm(/*)(.*)$ http://%{HTTP_HOST}/qpapps/admin?uri=$2 [R=307,L]
+RewriteRule ^admin(/*)(.*)$ http://%{HTTP_HOST}/qpapps/admin?uri=$2 [R=307,L]
 
 # presmerovanie volani www.quickpanel.sk/quickplan --> www.quickpanel.sk/qpapps/quickplan
 RewriteCond %{REQUEST_URI} ^/quickplan [NC]

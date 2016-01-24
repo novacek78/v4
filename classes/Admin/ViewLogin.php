@@ -5,10 +5,10 @@ class Admin_ViewLogin extends Admin_ViewAbstract
 
     public function render() {
 
-        $this->_renderSnippet('header');
+        $this->_renderSnippet('loginHeader');
 
-        $this->_renderSnippet('loginForm');
+        $this->_renderSnippet('loginBody');
 
-        $this->_renderSnippet('footer');
+        $this->_renderSnippet('loginFooter');
     }
 }

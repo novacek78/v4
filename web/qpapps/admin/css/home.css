@@ -1,0 +1,12 @@
+.logo-default {
+    margin-top: 8px !important;
+}
+
+.page-logo {
+    padding-left: 6px !important;
+}
+
+/* lave menu - podfarbenie vybratej kategorie*/
+.page-sidebar .page-sidebar-menu > li.active.open > a, .page-sidebar .page-sidebar-menu > li.active > a, .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu > li.active.open > a, .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu > li.active > a {
+    background-color: #336699 !important;
+}
