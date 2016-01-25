@@ -29,10 +29,10 @@ class Admin_ControllerLogin extends Controller
 
         // ak niekto pride na login a uz je prihlaseny, redirect na homepage
         if (isset($_SESSION['isLoggedIn']) && ($_SESSION['isLoggedIn'] === true)) {
-            Request::redirect(Request::makeUriAbsolute());
+            Request::redirect(Request::makeUriAbsolute('orders', 'open'));
         }
 
-        $this->_setViewData('title', 'Prihlásenie');
+        $this->_setViewData('title', 'QuickPanel prihlásenie');
         $this->_setViewData('formAction', Request::makeUriAbsolute('login'));
     }
 }

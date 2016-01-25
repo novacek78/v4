@@ -10,3 +10,11 @@
 .page-sidebar .page-sidebar-menu > li.active.open > a, .page-sidebar .page-sidebar-menu > li.active > a, .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu > li.active.open > a, .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu > li.active > a {
     background-color: #336699 !important;
 }
+
+.label {
+    display: block !important;
+}
+
+.label.label-sm {
+    padding: 9px 5px !important;
+}

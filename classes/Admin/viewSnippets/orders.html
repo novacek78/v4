@@ -14,64 +14,46 @@
             <div class="col-md-12 col-sm-12">
                 <!-- BEGIN EXAMPLE TABLE PORTLET-->
                 <div class="portlet light portlet-fit portlet-datatable bordered" id="form_wizard_1">
-                    <div class="portlet-title">
-                        <div class="caption">
-                            <i class=" icon-layers font-green"></i>
-                            <span class="caption-subject font-green sbold uppercase">Objednávky</span>
-                        </div>
-                        <div class="actions">
-                            <a class="btn btn-circle btn-icon-only btn-default" href="javascript:;">
-                                <i class="icon-cloud-upload"></i>
-                            </a>
-                            <a class="btn btn-circle btn-icon-only btn-default" href="javascript:;">
-                                <i class="icon-wrench"></i>
-                            </a>
-                            <a class="btn btn-circle btn-icon-only btn-default" href="javascript:;">
-                                <i class="icon-trash"></i>
-                            </a>
-                        </div>
-                    </div>
                     <div class="portlet-body">
                         <div class="dataTables_wrapper no-footer" id="sample_2_wrapper">
                             <table aria-describedby="sample_2_info" role="grid" class="table table-striped table-bordered table-hover table-checkable order-column dataTable no-footer" id="sample_2">
                                 <thead>
-
-
                                 <tr role="row">
-                                    <th aria-label="" style="width: 73px;" colspan="1" rowspan="1" class="table-checkbox sorting_disabled">
-                                        <div class="checker"><span><input class="group-checkable" data-set="#sample_2 .checkboxes" type="checkbox"></span></div></th>
-                                    <th aria-sort="ascending" aria-label=" Username : activate to sort column descending" style="width: 164px;" colspan="1" rowspan="1" aria-controls="sample_2" tabindex="0" class="sorting_asc"> Username</th>
-                                    <th aria-label=" Email : activate to sort column ascending" style="width: 247px;" colspan="1" rowspan="1" aria-controls="sample_2" tabindex="0" class="sorting"> Email</th>
-                                    <th aria-label=" Status : activate to sort column ascending" style="width: 124px;" colspan="1" rowspan="1" aria-controls="sample_2" tabindex="0" class="sorting"> Status </th>
+                                    <th aria-label="" style="width: 73px;" colspan="1" rowspan="1" class="table-checkbox sorting_disabled"><div class="checker"><span><input class="group-checkable" data-set="#sample_2 .checkboxes" type="checkbox"></span></div></th>
+                                    <th aria-sort="ascending" aria-label=" Username : activate to sort column descending" style="width: 40px;" colspan="1" rowspan="1" aria-controls="sample_2" tabindex="0" class="sorting_asc"> Číslo</th>
+                                    <th aria-label=" Status : activate to sort column ascending" style="width: 120px;" colspan="1" rowspan="1" aria-controls="sample_2" tabindex="0" class="sorting"> Stav </th>
+                                    <th aria-label=" Email : activate to sort column ascending" style="width: 160px;" colspan="1" rowspan="1" aria-controls="sample_2" tabindex="0" class="sorting"> Firma</th>
+                                    <th aria-label=" Status : activate to sort column ascending" style="width: 120px;" colspan="1" rowspan="1" aria-controls="sample_2" tabindex="0" class="sorting"> Meno </th>
+                                    <th aria-label=" Status : activate to sort column ascending" style="width: 320px;" colspan="1" rowspan="1" aria-controls="sample_2" tabindex="0" class="sorting"> Adresa </th>
+                                    <th aria-label=" Status : activate to sort column ascending" style="width: 120px;" colspan="1" rowspan="1" aria-controls="sample_2" tabindex="0" class="sorting"> Email </th>
+                                    <th aria-label=" Status : activate to sort column ascending" style="width: 80px;" colspan="1" rowspan="1" aria-controls="sample_2" tabindex="0" class="sorting"> Suma </th>
+                                    <th style="width: 40px;" colspan="1" rowspan="1" aria-controls="sample_2" tabindex="0" class="sorting_disabled"></th>
                                 </tr>
-
-
                                 </thead>
                                 <tbody>
 
-
                                 <tr role="row" class="gradeX odd">
-                                    <td>
-                                        <div class="checker"><span><input class="checkboxes" value="1" type="checkbox"></span></div> </td>
-                                    <td class="sorting_1"> coop </td>
-                                    <td class="">
-                                        <a href="mailto:userwow@gmail.com"> good@gmail.com </a>
-                                    </td>
-                                    <td class="">
-                                        <span class="label label-sm label-success"> Approved </span>
-                                    </td>
-                                </tr><tr role="row" class="gradeX even">
-                                    <td>
-                                        <div class="checker"><span><input class="checkboxes" value="1" type="checkbox"></span></div> </td>
-                                    <td class="sorting_1"> foopl </td>
-                                    <td class="">
-                                        <a href="mailto:userwow@gmail.com"> good@gmail.com </a>
-                                    </td>
-                                    <td class="">
-                                        <span class="label label-sm label-warning"> Pending </span>
-                                    </td>
+                                    <td><div class="checker"><span><input class="checkboxes" value="1" type="checkbox" /> </span></div> </td>
+                                    <td class="sorting_1"> 160-002 </td>
+                                    <td class=""><span class="label label-sm label-info"> Cakame platbu </span></td>
+                                    <td class=""> Colsys s.r.o.</td>
+                                    <td class=""> Matyas Del Campo</td>
+                                    <td class=""> Buštěhradská 109, 272 03 Kladno - Dubí</td>
+                                    <td class=""><a href="mailto:info@quickpanel.sk">info@quickpanel.sk</a></td>
+                                    <td class=""> 149,80 €</td>
+                                    <td><a href="javascript:;" class="btn btn-sm btn-outline red" title="Vymazať objednávku"><i class="fa fa-eraser"></i> </a></td>
                                 </tr>
-
+                                <tr role="row" class="gradeX even">
+                                    <td><div class="checker"><span><input class="checkboxes" value="1" type="checkbox"/> </span></div> </td>
+                                    <td class="sorting_1"> 160-003 </td>
+                                    <td class=""><span class="label label-sm label-success"> Zaplatene </span></td>
+                                    <td class=""> Colsys s.r.o.</td>
+                                    <td class=""> Matyas Del Campo</td>
+                                    <td class=""> Buštěhradská 109, 272 03 Kladno - Dubí</td>
+                                    <td class=""><a href="mailto:info@quickpanel.sk">info@quickpanel.sk</a></td>
+                                    <td class=""> 149,80 €</td>
+                                    <td><a href="javascript:;" class="btn btn-sm btn-outline red" title="Vymazať objednávku"><i class="fa fa-eraser"></i> </a></td>
+                                </tr>
 
                                 </tbody>
                             </table>

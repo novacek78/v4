@@ -36,6 +36,7 @@ switch (ENV){
 $routes = array();
 
 $ctrl = 'Orders';
+$routes[$ctrl][] = '';
 $routes[$ctrl][] = 'orders/open';
 $routes[$ctrl][] = 'orders/closed';
 $routes[$ctrl][] = 'orders/all';
@@ -43,17 +44,14 @@ $routes[$ctrl][] = 'orders/view/*';
 $routes[$ctrl][] = 'orders/edit/*';
 $routes[$ctrl][] = 'orders/delete/*';
 
-$ctrl = 'Login';
-$routes[$ctrl][] = 'login';
-
 $ctrl = 'Logout';
 $routes[$ctrl][] = 'logout';
 
 $ctrl = 'Utils';
 $routes[$ctrl][] = 'tmppanels';
 
-$ctrl = 'Home';
-$routes[$ctrl][] = '';
+$ctrl = 'Login';
+$routes[$ctrl][] = 'login';
 $routes[$ctrl][] = '*';
 $routes[$ctrl][] = '*/*';
 $routes[$ctrl][] = '*/*/*';
