@@ -8,17 +8,54 @@ abstract class View
      */
     protected $_data;
 
+    /**
+     * Inicializacia pohladu
+     */
+    public function __construct() {
+
+        $this->_data = new stdClass();
+    }
+
     public abstract function render();
 
+    public function __get($name) {
+
+        return $this->_data->$name;
+    }
 
     /**
-     * Nasetuje data pohladu
+     * Ulozi data pre pouzitie v pohlade.
+     * Ak je $value asociativne pole, bude vytvoreny objekt stdClass.
+     * Pracuje len s 1-rozmernymi poliami !
+     * Ak je $value NULL, danu polozku z pola hodnot vymaze.
      *
-     * @param stdClass $data
+     * @param string $name
+     * @param mixed  $value Moze to byt : hodnota | non-assoc.pole | assoc.pole | null
      */
-    public function setData($data) {
+    public function __set($name, $value) {
 
-        $this->_data = $data;
+        if ($value === null) {
+
+            // vymazanie danej polozky z pola dat
+            if (isset($this->_data->$name))
+                unset($this->_data->$name);
+        } else {
+
+            if (is_array($value) && Utils::isAssociativeArray($value)) {
+
+                if ( ! isset($this->_data->$name)) {
+                    $this->_data->$name = new stdClass();
+                }
+                foreach ($value as $key => $val) {
+                    if ($val === null)
+                        unset($this->_data->$name->$key);
+                    else
+                        $this->_data->$name->$key = $val;
+                }
+            } else {
+                $this->_data->$name = $value;
+            }
+        }
     }
 
     /**

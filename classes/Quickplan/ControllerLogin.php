@@ -32,7 +32,7 @@ class Quickplan_ControllerLogin extends Controller
             Request::redirect(Request::makeUriAbsolute());
         }
 
-        $this->_setViewData('title', 'Prihlásenie');
-        $this->_setViewData('formAction', Request::makeUriAbsolute('login'));
+        $this->View->title = 'Prihlásenie';
+        $this->View->formAction = Request::makeUriAbsolute('login');
     }
 }

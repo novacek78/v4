@@ -10,8 +10,8 @@ class Quickplan_ControllerEmail extends Quickplan_ControllerAbstract
         $this->_doMailboxList($ImapSrvr);
         $this->_doMessagesList($ImapSrvr);
 
-        $this->_setViewData('title', 'QuickPlan - emails');
-        $this->_setViewData('ajax-url-get-email-body', Request::makeUriAbsolute('ajax', 'getEmailBody'));
+        $this->View->title = 'QuickPlan - emails';
+        $this->View->ajax_url_get_email_body = Request::makeUriAbsolute('ajax', 'getEmailBody');
 
         $ImapSrvr->closeMailServerConnection();
     }
@@ -45,7 +45,7 @@ class Quickplan_ControllerEmail extends Quickplan_ControllerAbstract
         }
         $foldersHtml .= '</table>';
 
-        $this->_setViewData('mailboxes', $foldersHtml);
+        $this->View->mailboxes = $foldersHtml;
     }
 
     private function _doMessagesList($ImapSrvr) {
@@ -72,6 +72,6 @@ class Quickplan_ControllerEmail extends Quickplan_ControllerAbstract
         }
         $msgsHtml .= '</table>';
 
-        $this->_setViewData('messages', $msgsHtml);
+        $this->View->messages = $msgsHtml;
     }
 }

@@ -103,7 +103,7 @@
             id = id.substring(6);
         }
 
-        $.ajax({url: "{{ajax-url-get-email-body}}", data: "uid="+id, success: function(result){
+        $.ajax({url: "{{ajax_url_get_email_body}}", data: "uid="+id, success: function(result){
             if (MessagesSelectedRow)
                 MessagesSelectedRow.style = "background-color: " + messagesSelectedRowOriginalColor;
 

@@ -32,7 +32,7 @@ class Admin_ControllerLogin extends Controller
             Request::redirect(Request::makeUriAbsolute('orders', 'open'));
         }
 
-        $this->_setViewData('title', 'QuickPanel prihlásenie');
-        $this->_setViewData('formAction', Request::makeUriAbsolute('login'));
+        $this->View->title = 'QuickPanel prihlásenie';
+        $this->View->formAction = Request::makeUriAbsolute('login');
     }
 }
