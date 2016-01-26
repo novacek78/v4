@@ -107,7 +107,15 @@ abstract class View
 
                     // treba vlozit data z premennej "$paramName"
                     if (isset($this->_data->$paramName)) {
-                        $line = str_replace('{{' . $paramName . '}}', $this->_data->$paramName, $line);
+
+                        if (is_array($this->_data->$paramName)){
+                            // naplnenie datami z pola
+                            //....
+                        } else {
+                            // obyc.skalarne data
+                            $line = str_replace('{{' . $paramName . '}}', $this->_data->$paramName, $line);
+                        }
+
                     } else {
                         // ak nemame data, ktore tam treba doplnit, tak tam dame prazdny retazec (ak sme na vyvojovom prostredi, tak aj s upozornenim)
                         if (ENV == 'production')
