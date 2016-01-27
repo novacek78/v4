@@ -32,28 +32,41 @@
                                 </thead>
                                 <tbody>
 
-                                <tr role="row" class="gradeX odd">
-                                    <td class=""><span class="label label-sm qp-label-table label-info"> Cakame platbu </span></td>
-                                    <td class=""><a href="#" title="Upraviť objednávku"> 160-002 </a></td>
+                                {{arraystart:records}}
+                                <tr role="row" class="gradeX [[row_class]]">
+                                    <td class=""><span class="label label-sm qp-label-table [[status_class]]"> [[status_txt]] </span></td>
+                                    <td class=""><a href="#" title="Upraviť objednávku"> [[order_num]] </a></td>
                                     <td class="">3 dni</td>
-                                    <td class=""> Colsys s.r.o.</td>
-                                    <td class=""><a href="#" title="Objednávky užívateľa"> Matyas Del Campo</a></td>
-                                    <td class=""> Buštěhradská 109, 272 03 Kladno - Dubí</td>
-                                    <td class=""><a href="mailto:info@quickpanel.sk">info@quickpanel.sk</a></td>
-                                    <td class=""><a href="#" title="Upraviť faktúru"> 149,80 €</a></td>
+                                    <td class=""> [[company]]</td>
+                                    <td class=""><a href="#" title="Objednávky užívateľa"> [[full_name]]</a></td>
+                                    <td class=""> [[address]]</td>
+                                    <td class=""><a href="mailto:[[email]]">[[email]]</a></td>
+                                    <td class=""><a href="#" title="Upraviť faktúru"> [[price]] €</a></td>
                                     <td><a href="javascript:;" class="btn btn-sm qp-btn-table btn-outline red" title="Vymazať objednávku"><i class="fa fa-remove"></i> </a></td>
                                 </tr>
-                                <tr role="row" class="gradeX even">
-                                    <td class=""><span class="label label-sm qp-label-table label-success"> Zaplatene </span></td>
-                                    <td class=""><a href="#" title="Upraviť objednávku"> 160-001 </a></td>
-                                    <td class="">8 dní</td>
-                                    <td class=""> Colsys s.r.o.</td>
-                                    <td class=""><a href="#" title="Objednávky užívateľa"> Matyas Del Campo</a></td>
-                                    <td class=""> Buštěhradská 109, 272 03 Kladno - Dubí</td>
-                                    <td class=""><a href="mailto:info@quickpanel.sk">info@quickpanel.sk</a></td>
-                                    <td class=""><a href="#" title="Upraviť faktúru"> 149,80 €</a></td>
-                                    <td><a href="javascript:;" class="btn btn-sm qp-btn-table btn-outline red" title="Vymazať objednávku"><i class="fa fa-remove"></i> </a></td>
-                                </tr>
+                                {{arrayend:}}
+                                <!--<tr role="row" class="gradeX odd">-->
+                                    <!--<td class=""><span class="label label-sm qp-label-table label-default"> Cakame platbu </span></td>-->
+                                    <!--<td class=""><a href="#" title="Upraviť objednávku"> 160-002 </a></td>-->
+                                    <!--<td class="">3 dni</td>-->
+                                    <!--<td class=""> Colsys s.r.o.</td>-->
+                                    <!--<td class=""><a href="#" title="Objednávky užívateľa"> Matyas Del Campo</a></td>-->
+                                    <!--<td class=""> Buštěhradská 109, 272 03 Kladno - Dubí</td>-->
+                                    <!--<td class=""><a href="mailto:info@quickpanel.sk">info@quickpanel.sk</a></td>-->
+                                    <!--<td class=""><a href="#" title="Upraviť faktúru"> 149,80 €</a></td>-->
+                                    <!--<td><a href="javascript:;" class="btn btn-sm qp-btn-table btn-outline red" title="Vymazať objednávku"><i class="fa fa-remove"></i> </a></td>-->
+                                <!--</tr>-->
+                                <!--<tr role="row" class="gradeX even">-->
+                                    <!--<td class=""><span class="label label-sm qp-label-table label-primary"> Zaplatene </span></td>-->
+                                    <!--<td class=""><a href="#" title="Upraviť objednávku"> 160-001 </a></td>-->
+                                    <!--<td class="">8 dní</td>-->
+                                    <!--<td class=""> Colsys s.r.o.</td>-->
+                                    <!--<td class=""><a href="#" title="Objednávky užívateľa"> Matyas Del Campo</a></td>-->
+                                    <!--<td class=""> Buštěhradská 109, 272 03 Kladno - Dubí</td>-->
+                                    <!--<td class=""><a href="mailto:info@quickpanel.sk">info@quickpanel.sk</a></td>-->
+                                    <!--<td class=""><a href="#" title="Upraviť faktúru"> 149,80 €</a></td>-->
+                                    <!--<td><a href="javascript:;" class="btn btn-sm qp-btn-table btn-outline red" title="Vymazať objednávku"><i class="fa fa-remove"></i> </a></td>-->
+                                <!--</tr>-->
 
                                 </tbody>
                             </table>

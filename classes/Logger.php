@@ -30,6 +30,9 @@ class Logger
             $data = PHP_EOL . var_export($data, true);
         }
 
+        if (is_bool($data))
+            $data = (($data) ? 'boolean true' : 'boolean false');
+
         try {
             $f = FOpen(LOG_DIR . date('Y-m-d') . "$fileNameSuffix.txt", "a");
             FWrite($f, $prependText . $data . PHP_EOL);

@@ -74,6 +74,7 @@ abstract class View
             $code = file_get_contents($fileName);
             $code = $this->_importSnippets($code);
             $code = $this->_insertData($code);
+            $code = $this->_insertArrays($code);
             echo $code;
         } else {
             throw new Exception('HTML snippet "' . $fileName . '" not found.');
@@ -94,7 +95,7 @@ abstract class View
 
         // v kazdom riadku hladame vyskyt placeholdrov {snippet{xxxx}}
         foreach ($lines as $lineNum => $line) {
-            preg_match_all('/{{snippet:(.*?)}}/', $line, $match);
+            preg_match_all('/{{snippet:(.*)}}/', $line, $match);
             if ( ! empty($match[1])) {
 
                 // nezavisle na tom, kolko placeholdrov sa naslo, vsetky nahradime vlozenim html snippetu
@@ -130,46 +131,81 @@ abstract class View
      */
     protected function _insertData($htmlCode) {
 
-        // cely HTML kod rozbijeme na riadky
-        $lines = explode(PHP_EOL, $htmlCode);
+        preg_match_all('/{{([a-zA-Z0-9_]*)}}/', $htmlCode, $match);
+        $params = $match[1];
 
-        // v kazdom riadku hladame vyskyt placeholdrov {{xxxx}}
-        foreach ($lines as $lineNum => $line) {
-            preg_match_all('/{{(.*?)}}/', $line, $match);
-            if ( ! empty($match[1])) {
+        if ( ! empty($params)) {
 
-                // nezavisle na tom, kolko placeholdrov sa naslo, vsetky nahradime datami (ak su nasetovane)
-                $params = $match[1];
-                foreach ($params as $paramName) {
+            // nezavisle na tom, kolko placeholdrov sa naslo, vsetky nahradime datami (ak su nasetovane)
+            foreach ($params as $paramName) {
 
-                    // treba vlozit data z premennej "$paramName"
-                    if (isset($this->_data->$paramName)) {
+                // treba vlozit data z premennej "$paramName"
+                if (isset($this->_data->$paramName)) {
 
-                        if (is_array($this->_data->$paramName)){
-                            // naplnenie datami z pola
-                            //....
-                        } else {
-                            // obyc.skalarne data
-                            $line = str_replace('{{' . $paramName . '}}', $this->_data->$paramName, $line);
-                        }
+                    $htmlCode = str_replace('{{' . $paramName . '}}', $this->_data->$paramName, $htmlCode);
 
-                    } else {
-                        // ak nemame data, ktore tam treba doplnit, tak tam dame prazdny retazec (ak sme na vyvojovom prostredi, tak aj s upozornenim)
-                        if (ENV == 'production')
-                            $line = str_replace('{{' . $paramName . '}}', '', $line);
-                        else {
-                            $line = str_replace('{{' . $paramName . '}}', "Data '$paramName' not set!'", $line);
-                            Logger::error("Missing data for parameter '$paramName' in snippet.");
-                        }
+                } else {
+                    // ak nemame data, ktore tam treba doplnit, tak tam dame prazdny retazec (ak sme na vyvojovom prostredi, tak aj s upozornenim)
+                    if (ENV == 'production')
+                        $htmlCode = str_replace('{{' . $paramName . '}}', '', $htmlCode);
+                    else {
+                        $htmlCode = str_replace('{{' . $paramName . '}}', "Data '$paramName' not set!'", $htmlCode);
+                        Logger::error("Missing data for parameter '$paramName' in snippet.");
                     }
                 }
-
-                // riadok s nahradenymi placeholdrami ulozime naspat do pola riadkov
-                $lines[$lineNum] = $line;
             }
         }
 
         // vsetko spojime naspat do HTML a vratime
-        return implode(PHP_EOL, $lines);
+        return $htmlCode;
+    }
+
+    /**
+     * V HTML kode nahradime placeholdre array datami
+     *
+     * @param string $htmlCode
+     * @return string
+     */
+    protected function _insertArrays($htmlCode) {
+
+        preg_match_all('/{{arraystart:([\s[:graph:]]*){{arrayend:}}/u', $htmlCode, $match); // \s = any whitespace , [:graph:] = any visible character , u = "treat as unicode" modifier
+        $blocks = $match[1];
+
+        if ( ! empty($blocks)) {
+
+            // nezavisle na tom, kolko placeholdrov sa naslo, vsetky nahradime datami (ak su nasetovane)
+            foreach ($blocks as $htmlBlock) {
+
+                $arrayName = substr($htmlBlock, 0, strpos($htmlBlock, '}}'));
+                if ( ! isset($this->_data->$arrayName)) {
+                    Logger::debug("Array '$arrayName' not found in View's data.");
+                    continue;
+                }
+
+                $htmlBlock = str_replace("$arrayName}}", '', $htmlBlock); // ocistime zaciatok bloku od nazvu pola
+                $htmlResult = '';
+                foreach($this->_data->$arrayName as $zaznam) {
+                    preg_match_all('/\[\[([a-zA-Z0-9_]*)\]\]/', $htmlBlock, $match);
+                    $keys = $match[1]; // vsetky najdene kluce/indexy pola
+
+                    // nahradime v jednej instancii HTML bloku vsetky vyskyty klucov pola
+                    $tmpBlock = $htmlBlock;
+                    foreach ($keys as $key) {
+                        $tmpBlock = str_replace("[[$key]]", $zaznam[$key], $tmpBlock);
+                    }
+                    // takto opraveny blok pripojime k vysledku
+                    $htmlResult .= $tmpBlock;
+                }
+                // povodny blok nahradime vysledkom
+                $htmlCode = str_replace(
+                    "{{arraystart:$arrayName}}" . $htmlBlock . "{{arrayend:}}",
+                    $htmlResult,
+                    $htmlCode
+                );
+            }
+        }
+
+        // vsetko spojime naspat do HTML a vratime
+        return $htmlCode;
     }
 }
