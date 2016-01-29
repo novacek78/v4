@@ -40,9 +40,10 @@ $routes = array();
 
 $ctrl = 'Orders';
 $routes[$ctrl][] = '';
+$routes[$ctrl][] = 'orders';
+$routes[$ctrl][] = 'orders/active';
 $routes[$ctrl][] = 'orders/open';
 $routes[$ctrl][] = 'orders/closed';
-$routes[$ctrl][] = 'orders/all';
 $routes[$ctrl][] = 'orders/view/*';
 $routes[$ctrl][] = 'orders/edit/*';
 $routes[$ctrl][] = 'orders/delete/*';

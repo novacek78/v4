@@ -5,8 +5,23 @@ class Admin_ControllerOrders extends Admin_ControllerAbstract
 
     public function run() {
 
-        // vyberieme vsetky otvorene objednavky
-        $orders = Admin_ModelOrder::getOpenOrders();
+        switch (Request::getParamByName('uri', REQUEST_PARAM_STRING)) {
+            case 'orders/active':
+                // vyberieme vsetky objednavky na ktorych treba robit
+                $orders = Admin_ModelOrder::getActiveOrders();
+                break;
+            case 'orders/open':
+                // vyberieme vsetky otvorene objednavky
+                $orders = Admin_ModelOrder::getOpenOrders();
+                break;
+            case 'orders/closed':
+                // vyberieme vsetky uzatvorene objednavky
+                $orders = Admin_ModelOrder::getClosedOrders();
+                break;
+            default:
+                $orders = Admin_ModelOrder::getOrders();
+        }
+
 
         // preprocessing dat
         $neparny = true;
