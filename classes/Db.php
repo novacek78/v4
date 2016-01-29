@@ -15,6 +15,7 @@ class Db {
 
     private static $_dbEngine = null;
     private static $_dbHost = null;
+    private static $_dbPort = null;
     private static $_dbName = null;
     private static $_dbUser = null;
     private static $_dbPwd = null;
@@ -52,11 +53,12 @@ class Db {
             return;
 
         if (empty(self::$_dbHost))
-            self::init(DB_NAME, DB_USER, DB_PWD, DB_HOST, DB_ENGINE);
+            self::init(DB_NAME, DB_USER, DB_PWD, DB_HOST, DB_PORT, DB_ENGINE);
 
         self::$_connection = new PDO(
             self::$_dbEngine .
             ':host=' . self::$_dbHost .
+            ';port=' . self::$_dbPort .
             ';dbname=' . self::$_dbName .
             ';charset=utf8',
             self::$_dbUser,
@@ -67,9 +69,10 @@ class Db {
                 PDO::ATTR_EMULATE_PREPARES => false));
     }
 
-    public static function init($dbName, $userName, $pwd, $dbHost, $dbEngine) {
+    public static function init($dbName, $userName, $pwd, $dbHost, $dbPort, $dbEngine) {
 
         self::$_dbHost = $dbHost;
+        self::$_dbPort = $dbPort;
         self::$_dbEngine = $dbEngine;
         self::$_dbName = $dbName;
         self::$_dbUser = $userName;

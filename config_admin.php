@@ -6,15 +6,17 @@ define('BASE_HREF', '/qpapps/admin/?uri=');
 
 switch (ENV){
     case 'production':
-        define('DB_HOST', 'localhost');
+        define('DB_HOST', 'mysql51.websupport.sk');
+        define('DB_PORT', '3309');
         define('DB_ENGINE', 'mysql');
-        define('DB_NAME', 'qp_test');
-        define('DB_USER', 'qp_test');
-        define('DB_PWD', 'matahari');
+        define('DB_NAME', 'quickpanel');
+        define('DB_USER', 'quickpaneladmin');
+        define('DB_PWD', 'oxalokih');
         break;
 
     case 'testing':
         define('DB_HOST', 'localhost');
+        define('DB_PORT', '');
         define('DB_ENGINE', 'mysql');
         define('DB_NAME', 'qp_test');
         define('DB_USER', 'qp_test');
@@ -23,6 +25,7 @@ switch (ENV){
 
     case 'development':
         define('DB_HOST', 'localhost');
+        define('DB_PORT', '');
         define('DB_ENGINE', 'mysql');
         define('DB_NAME', 'qp_local');
         define('DB_USER', 'root');

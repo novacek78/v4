@@ -16,7 +16,7 @@ abstract class Controller
         if (class_exists($viewName))
             $this->View = new $viewName();
         else
-            throw new Exception("Class $viewName not found!");
+            Logger::debug("Class $viewName not found!");
     }
 
     abstract public function run();
