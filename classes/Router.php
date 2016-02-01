@@ -25,6 +25,7 @@ class Router
 
                 if (preg_match($pattern, $uri) === 1) {
                     // URI sedi na tuto routu !
+                    Logger::debug("Najdena routa pre URI '$uri' --> CONTROLLER $ctrlName");
                     $controllerName = $ctrlName;
                     break 2;
                 }

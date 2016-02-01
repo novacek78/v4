@@ -19,20 +19,21 @@ class Admin_ControllerLogin extends Controller
 
                 if ($User->login($PostData)) {
                     Logger::debug('User logged in.');
-                    Request::redirect(Request::makeUriAbsolute('orders', 'open')); // default home page
+                    Request::redirect(Request::makeUriRelative('orders', 'active')); // default home page
                 } else {
                     Logger::debug("User login failed ({$PostData->formName})");
-                    Request::redirect(Request::makeUriAbsolute('login'));
+                    Request::redirect(Request::makeUriRelative('login'));
                 }
             }
         }
 
         // ak niekto pride na login a uz je prihlaseny, redirect na homepage
         if (isset($_SESSION['isLoggedIn']) && ($_SESSION['isLoggedIn'] === true)) {
-            Request::redirect(Request::makeUriAbsolute('orders', 'open'));
+            Logger::debug('Make absolute URI = '.Request::makeUriAbsolute('orders', 'active'));
+            Request::redirect(Request::makeUriRelative('orders', 'active'));
         }
 
-        $this->View->title = 'QuickPanel prihlásenie';
-        $this->View->formAction = Request::makeUriAbsolute('login');
+        $this->_View->title = 'QuickPanel prihlásenie';
+        $this->_View->formAction = Request::makeUriRelative('login');
     }
 }

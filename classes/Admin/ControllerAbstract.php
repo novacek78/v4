@@ -22,7 +22,7 @@ abstract class Admin_ControllerAbstract extends Controller
         if ( ! isset($_SESSION['isLoggedIn']) || ($_SESSION['isLoggedIn'] !== true)) {
 
             unset($_SESSION);
-            Request::redirect(Request::makeUriRelative('login'));
+            Request::redirect(Request::makeUriAbsolute());
         }
     }
 }

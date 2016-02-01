@@ -11,6 +11,7 @@ try {
 
     $userRandomId = uniqid();
     Logger::debug("Error ID: $userRandomId");
+    Logger::error("");
     Logger::error("Error ID: $userRandomId");
     Logger::error("ENV: " . ENV);
     Logger::error($e->getMessage());

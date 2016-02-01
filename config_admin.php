@@ -2,7 +2,7 @@
 
 define('APP_DIR', 'Admin/');
 define('CLASSES_PREFIX', 'Admin_');
-define('BASE_HREF', '/qpapps/admin/?uri=');
+define('BASE_HREF', 'admin/');
 
 switch (ENV){
     case 'production':
@@ -39,7 +39,6 @@ switch (ENV){
 $routes = array();
 
 $ctrl = 'Orders';
-$routes[$ctrl][] = '';
 $routes[$ctrl][] = 'orders';
 $routes[$ctrl][] = 'orders/active';
 $routes[$ctrl][] = 'orders/open';
@@ -56,6 +55,7 @@ $routes[$ctrl][] = 'tmppanels';
 
 $ctrl = 'Login';
 $routes[$ctrl][] = 'login';
+$routes[$ctrl][] = '';
 $routes[$ctrl][] = '*';
 $routes[$ctrl][] = '*/*';
 $routes[$ctrl][] = '*/*/*';

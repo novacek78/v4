@@ -17,8 +17,8 @@ class Application
         Logger::info('', false);
 
         $protocol = empty($_SERVER['HTTPS']) ? 'http://' : 'https://';
-        Logger::debug( $_SERVER['REQUEST_METHOD'] . " " . $protocol . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI']);
 
+        Logger::debug( $_SERVER['REQUEST_METHOD'] . " " . $protocol . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI']);
         Logger::info('App start...');
 
         session_start();

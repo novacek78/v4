@@ -6,8 +6,9 @@ class Logger
 
     public static function debug($data, $withTimestamp = true) {
 
-        if (ENV == 'development')
-            self::_log($data, 'dbg', $withTimestamp);
+        if (ENV != 'development') return;
+
+        self::_log($data, 'dbg', $withTimestamp);
     }
 
     private static function _log($data, $level, $withTimestamp) {
@@ -39,7 +40,6 @@ class Logger
             FClose($f);
         } catch (Exception $e) {
         }
-//        LogTxt(' [ERROR] ' . $what);
     }
 
     public static function info($data, $withTimestamp = true) {

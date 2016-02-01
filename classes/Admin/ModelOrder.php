@@ -10,7 +10,7 @@ class Admin_ModelOrder
      */
     static public function getActiveOrders() {
 
-        return self::getOrders('status < 900 AND (status = 500 OR status = 501 OR status = 502 OR status = 700 OR status = 707 OR status = 800)');
+        return self::getOrders('status < 900 AND (status IN (500, 501, 502, 700, 707, 800))');
     }
 
     /**

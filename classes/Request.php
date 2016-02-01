@@ -80,13 +80,13 @@ class Request
     public static function makeUriRelative() {
 
         $arrArgs = func_get_args();
-        return BASE_HREF . '' . implode('/', $arrArgs);
+        return implode('/', $arrArgs);
     }
 
     public static function makeUriAbsolute() {
 
         $arrArgs = func_get_args();
-        return ((empty($_SERVER['HTTPS'])) ? 'http://' : 'https://') . $_SERVER['HTTP_HOST'] . BASE_HREF . '' . implode('/', $arrArgs);
+        return ((empty($_SERVER['HTTPS'])) ? 'http://' : 'https://') . $_SERVER['HTTP_HOST'] . '/' . BASE_HREF . '' . implode('/', $arrArgs);
     }
 
     public static function redirect($uri) {
