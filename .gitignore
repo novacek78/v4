@@ -12,5 +12,4 @@ glyphicons*
 jquery*
 
 # kupena sablona
-/web/qpapps/admin/metronic
-/web/qpapps/assets
+web/qpapps/assets
